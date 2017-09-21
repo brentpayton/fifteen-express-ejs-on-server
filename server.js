@@ -1,12 +1,17 @@
-var express = require('express');
-var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
-var fs = require('fs');
-var spdy = require('spdy');
-var privatekey = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/privkey.pem');
-var certificate = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/fullchain.pem');
-var app = express();
-const port = 3010;
+// ----------------------------------------------------------------------------
+// Express
+// ----------------------------------------------------------------------------
+var express               = require('express');
+var passport              = require('passport');
+var Strategy              = require('passport-facebook').Strategy;
+var fs                    = require('fs');
+var spdy                  = require('spdy');
+var app                   = express();
+                            app.set('view engine', 'ejs');
+                            app.use(express.static(__dirname + '/public'));
+var moment                = require('moment');
+var promise               = require('bluebird');
+const port                = 3010;
 
 // ----------------------------------------------------------------------------
 // SPDY
@@ -27,10 +32,13 @@ spdy
     }
   });
 
-app.enable('view cache'); // To enable handlebars view caching
-// process.env.NODE_ENV = "production"; // Enables view caching
-// process.env.NODE_ENV = "dev"; // Disables view caching
-
+// ----------------------------------------------------------------------------
+// Mongoose
+// ----------------------------------------------------------------------------
+var mongoose              = require('mongoose');
+                          // mongoose.connect('mongodb://localhost/yelpcamp'); //Dev
+                          mongoose.connect('mongodb://mongodb://fifteenlines:password@ds147034.mlab.com:47034/fifteenlines_dev');
+mongoose.Promise          = Promise;
 
 //------------------------------------------------------------------------------
 // Facebook
@@ -57,7 +65,6 @@ passport.use(new Strategy({
     return cb(null, profile);
   }));
 
-
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -75,9 +82,6 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-// Create a new Express application.
-// var app = express();
-
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -93,7 +97,6 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 // session.
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // Define routes.
 app.get('/',
