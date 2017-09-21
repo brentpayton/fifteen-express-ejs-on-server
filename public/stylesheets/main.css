@@ -1,0 +1,47 @@
+.thumbnail img {
+  width: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+.thumbnail .caption-full {
+  padding: 10px;
+}
+
+.delete-form {
+  display: inline;
+}
+
+.usertable .row:nth-child(2n+3) {
+  background: lightgray;
+}
+
+
+@media (max-width: 768px) {
+.btn-responsive {
+  border-radius:3px;
+  font-size:80%;
+  line-height: 1;
+  padding:2px 4px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+.btn-responsive {
+  font-size:90%;
+  line-height: 1.2;
+  padding:4px 9px;
+  }
+}
+
+.wrap {
+  word-wrap: break-word;
+}
+
+.fifteencard {
+  border: 1px solid white;
+  margin: 5px;
+  padding: 15px;
+}
