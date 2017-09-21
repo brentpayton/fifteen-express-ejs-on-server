@@ -7,15 +7,6 @@ var privatekey = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/pri
 var certificate = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/fullchain.pem');
 var app = express();
 const port = 3010;
-//------------------------------------------------------------------------------
-// SSL
-//------------------------------------------------------------------------------
-// var privatekey = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/privkey.pem');
-// var certificate = fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/fullchain.pem');
-// var credentials = {key: privatekey, cert: certificate};
-// var express = require('express');
-// var app = express();
-
 
 // ----------------------------------------------------------------------------
 // SPDY
