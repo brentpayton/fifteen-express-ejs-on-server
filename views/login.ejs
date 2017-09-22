@@ -1,1 +1,48 @@
-<a href="/login/facebook">Log In with Facebook</a>
+<% include partials/header %>
+
+<%# Facebook analytics.  Not sure if needed for log-in with FB%>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1957965834451520',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class='container'>
+
+  <div class='row'>
+    <div class="col-md-8 offset-md-4">
+      <h1>Log In</h1>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-8 offset-md-4 centered'>
+      <form action='/login' method='POST'>
+        <div class='form-group'>
+          <input class='form-control' type='text' name='username' placeholder='Username'>
+        </div>
+        <div class='form-group'>
+          <input class='form-control' type='password' name='password' placeholder='Password'>
+        </div>
+          <input class='btn btn-primary' type='submit' value='Log In!'>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<% include partials/footer %>

@@ -9,6 +9,12 @@ var spdy                  = require('spdy');
 var app                   = express();
                             app.set('view engine', 'ejs');
                             app.use(express.static(__dirname + '/public'));
+var expressSession        = require('express-session');
+                            app.use(expressSession({
+                              secret              : 'seattle',
+                              resave              : false,
+                              saveUninitialized   : false
+                            }));
 var moment                = require('moment');
 var promise               = require('bluebird');
 const port                = 3010;
@@ -36,12 +42,18 @@ spdy
 // Mongoose
 // ----------------------------------------------------------------------------
 var mongoose              = require('mongoose');
-                          // mongoose.connect('mongodb://localhost/yelpcamp'); //Dev
-                          mongoose.connect('mongodb://mongodb://fifteenlines:password@ds147034.mlab.com:47034/fifteenlines_dev');
+                            mongoose.connect('mongodb://mongodb://fifteenlines:password@ds147034.mlab.com:47034/fifteenlines_dev');
 mongoose.Promise          = Promise;
 
+// ----------------------------------------------------------------------------
+// Models
+// ----------------------------------------------------------------------------
+var Comment               = require('./models/comment.js');
+var User                  = require('./models/user.js');
+var Poem                  = require('./models/poem.js');
+
 //------------------------------------------------------------------------------
-// Facebook
+// Facebook Auth
 //------------------------------------------------------------------------------
 
 // Configure the Facebook strategy for use by Passport.
@@ -82,10 +94,51 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
+// ----------------------------------------------------------------------------
+// Local Auth
+// ----------------------------------------------------------------------------
+var LocalStrategy         = require('passport-local');
+var passport              = require('passport');
+                            app.use(passport.initialize());
+                            app.use(passport.session());
+                            passport.serializeUser(User.serializeUser());
+                            passport.deserializeUser(User.deserializeUser());
+                            passport.use(new LocalStrategy(User.authenticate()));
+var bodyParser            = require('body-parser');
+                            app.use(bodyParser.urlencoded({extended: true}));
+
+// ----------------------------------------------------------------------------
+// EJS
+// ----------------------------------------------------------------------------
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+// ----------------------------------------------------------------------------
+// Method Override
+// ----------------------------------------------------------------------------
+var methodOverride        = require('method-override');
+                            app.use(methodOverride('_method'));
+
+// ----------------------------------------------------------------------------
+// Connect-Flash
+// ----------------------------------------------------------------------------
+var flash                 = require('connect-flash');
+                            app.use(flash());
+
+// ----------------------------------------------------------------------------
+// Make 'currentUser' and 'message' available to every route
+// ----------------------------------------------------------------------------
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+  next();
+});
+
+// ----------------------------------------------------------------------------
+// Middleware
+// ----------------------------------------------------------------------------
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
@@ -98,30 +151,56 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
+// ----------------------------------------------------------------------------
+// Routes
+// ----------------------------------------------------------------------------
+var poemRoutes              = require('./routes/poems.js');
+                            // All poem routes start with '/poems'
+                            app.use('/poems', poemRoutes);
 
-app.get('/login',
-  function(req, res){
-    res.render('login');
-  });
+// TODO:  Decide whether to keep comments or not.  They will have to be re-implemented
+// if they're kept.
 
-app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  var commentRoutes         = require('./routes/comments.js');
+                              // All comment routes start with 'campgrounds/:id/comments'
+                              app.use('/campgrounds/:id/comments', commentRoutes);
 
-app.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+  var authRoutes            = require('./routes/auth.js');
+                              app.use(authRoutes);
 
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+  var indexRoutes           = require('./routes/index.js');
+                              app.use(indexRoutes);
 
-// app.listen(port);
+  var userRoutes            = require('./routes/users.js');
+                              app.use(userRoutes);
+
+  // var facebookRoutes        = require('./routes/facebook.js');
+  //                             app.use(facebookRoutes);
+
+  // ----------------------------------------------------------------------------
+  // Facebook Routes
+  // ----------------------------------------------------------------------------
+  app.get('/facebook',
+    function(req, res) {
+      res.render('facebook/home', { user: req.user });
+    });
+
+  app.get('/facebook/login',
+    function(req, res){
+      res.render('facebook/login');
+    });
+
+  app.get('/login/facebook',
+    passport.authenticate('facebook'));
+
+  app.get('/login/facebook/return',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    });
+
+  app.get('/facebook/profile',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res){
+      res.render('facebook/profile', { user: req.user });
+    });

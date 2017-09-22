@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<div class='container'>
+
+  <!--Control visibility of add poem button based on whether a user is logged in or not.-->
+  <% if (currentUser){ %>
+    <div class='row'>
+      <div>
+        <a class="btn btn-success center-block" href='/poems/new'>Add a new poem</a>
+      </div>
+    </div>
+  <% } %>
+
+  <div class='row text-center'>
+    <% poems.forEach(function(poem){ %>
+      <div class='col-md-3 col-sm-6 fifteencard'>
+        <div class='caption'>
+          <h4> <%= poem.title %> </h4>
+        </div>
+        <div style="text-align: left;">
+          <a href='/poems/<%= poem._id %>' class='btn btn-primary'>View</a>
+        </div>
+        <div style="text-align: left;">
+          <p> <%= poem.content.substring(0,100) %> . . .  </p>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+
+</div>
+
+<% include ../partials/footer %>

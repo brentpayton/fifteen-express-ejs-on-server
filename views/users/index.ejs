@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+
+<div class='container usertable'>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+      <h1>All Users</h1>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-2'>
+      <strong>&nbsp;</strong>
+    </div>
+    <div class='col-xs-2'>
+      <strong>Username</strong>
+    </div>
+    <div class='col-xs-2'>
+      <strong>Email</strong>
+    </div>
+    <div class='col-xs-2'>
+      <strong>Admin</strong>
+    </div>
+    <div class='col-xs-4'>
+      <strong>User ID</strong>
+    </div>
+  </div>
+
+<% users.forEach(function(user){ %>
+  <div class="row">
+  <div class="col-xs-2" style="vertical-align: middle">
+    <a class='btn btn-primary btn-responsive' type="submit" href="/users/<%= user._id %>/edit">
+      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a>
+    <form class='delete-form delete' action='/users/<%= user._id %>?_method=DELETE' method="POST">
+      <button class='btn btn-danger btn-responsive' type="submit">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</button>
+    </form>
+  </div>
+    <div class='col-xs-2 wrap'>
+      <%= user.username %>
+    </div>
+    <div class='col-xs-3 wrap'>
+      <%= user.email %>
+    </div>
+    <div class='col-xs-1'>
+      <%= user.administrator %>
+    </div>
+    <div class='col-xs-4 wrap'>
+      <%= user._id %>
+    </div>
+  </div>
+<% }) %>
+
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <% include ../partials/footer %>
+    </div>
+  </div>
+</div>
