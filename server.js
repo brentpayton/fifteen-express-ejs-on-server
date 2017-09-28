@@ -2,6 +2,8 @@
 // Express
 // ----------------------------------------------------------------------------
 var express               = require('express');
+
+
 var passport              = require('passport');
 var Strategy              = require('passport-facebook').Strategy;
 var fs                    = require('fs');
@@ -9,6 +11,11 @@ var spdy                  = require('spdy');
 var app                   = express();
                             app.set('view engine', 'ejs');
                             app.use(express.static(__dirname + '/public'));
+var bodyParser            = require('body-parser');
+// For Facebook Login
+                            app.use(bodyParser.urlencoded({ extended: false }));
+                            app.use(bodyParser.json());
+//
 var expressSession        = require('express-session');
                             app.use(expressSession({
                               secret              : 'seattle',
@@ -20,23 +27,78 @@ var promise               = require('bluebird');
 const port                = 3010;
 
 // ----------------------------------------------------------------------------
-// SPDY
+// Facebook Login (Not OAuth)
 // ----------------------------------------------------------------------------
-var options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/privkey.pem'),
-    cert:  fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/fullchain.pem')
-};
+const Guid = require('guid');
+const Mustache  = require('mustache');
+const Request  = require('request');
+const Querystring  = require('querystring');
+var csrf_guid = Guid.raw();
+const account_kit_api_version = 'v1.00';
+const app_id = '1957965834451520';
+const app_secret = '64306eb0e0e97ae10b4445d0d986d890';
+const me_endpoint_base_url = 'https://graph.accountkit.com/v1.0/me';
+const token_exchange_base_url = 'https://graph.accountkit.com/v1.0/access_token';
 
-spdy
-  .createServer(options, app)
-  .listen(port, (error) => {
-    if (error) {
-      console.error(error);
-      return process.exit(1);
-    } else {
-      console.log('Listening on port: ' + port + '.');
-    }
-  });
+function loadLogin() {
+  return fs.readFileSync('public/fblogin.html').toString();
+}
+
+app.get('/fblogin', function(request, response){
+  var view = {
+    appId: app_id,
+    csrf: csrf_guid,
+    version: account_kit_api_version,
+  };
+
+  var html = Mustache.to_html(loadLogin(), view);
+  response.send(html);
+});
+
+function loadLoginSuccess() {
+  return fs.readFileSync('public/login_success.html').toString();
+}
+
+app.post('/login_success', function(request, response){
+
+  // CSRF check
+  if (request.body.csrf === csrf_guid) {
+    var app_access_token = ['AA', app_id, app_secret].join('|');
+    var params = {
+      grant_type: 'authorization_code',
+      code: request.body.code,
+      access_token: app_access_token
+    };
+
+    // exchange tokens
+    var token_exchange_url = token_exchange_base_url + '?' + Querystring.stringify(params);
+    Request.get({url: token_exchange_url, json: true}, function(err, resp, respBody) {
+      var view = {
+        user_access_token: respBody.access_token,
+        expires_at: respBody.expires_at,
+        user_id: respBody.id,
+      };
+
+      // get account details at /me endpoint
+      var me_endpoint_url = me_endpoint_base_url + '?access_token=' + respBody.access_token;
+      Request.get({url: me_endpoint_url, json:true }, function(err, resp, respBody) {
+        // send login_success.html
+        if (respBody.phone) {
+          view.phone_num = respBody.phone.number;
+        } else if (respBody.email) {
+          view.email_addr = respBody.email.address;
+        }
+        var html = Mustache.to_html(loadLoginSuccess(), view);
+        response.send(html);
+      });
+    });
+  }
+  else {
+    // login failed
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end("Something went wrong. :( ");
+  }
+});
 
 // ----------------------------------------------------------------------------
 // Mongoose
@@ -53,7 +115,7 @@ var User                  = require('./models/user.js');
 var Poem                  = require('./models/poem.js');
 
 //------------------------------------------------------------------------------
-// Facebook Auth
+// Facebook OAuth
 //------------------------------------------------------------------------------
 
 // Configure the Facebook strategy for use by Passport.
@@ -74,6 +136,7 @@ passport.use(new Strategy({
     // be associated with a user record in the application's database, which
     // allows for account linking and authentication with other identity
     // providers.
+    // console.log(profile); // BKP:  Doesn't work.
     return cb(null, profile);
   }));
 
@@ -104,8 +167,8 @@ var passport              = require('passport');
                             passport.serializeUser(User.serializeUser());
                             passport.deserializeUser(User.deserializeUser());
                             passport.use(new LocalStrategy(User.authenticate()));
-var bodyParser            = require('body-parser');
-                            app.use(bodyParser.urlencoded({extended: true}));
+// var bodyParser            = require('body-parser');
+//                             app.use(bodyParser.urlencoded({extended: true}));
 
 // ----------------------------------------------------------------------------
 // EJS
@@ -174,9 +237,6 @@ var poemRoutes              = require('./routes/poems.js');
   var userRoutes            = require('./routes/users.js');
                               app.use(userRoutes);
 
-  // var facebookRoutes        = require('./routes/facebook.js');
-  //                             app.use(facebookRoutes);
-
   // ----------------------------------------------------------------------------
   // Facebook Routes
   // ----------------------------------------------------------------------------
@@ -185,10 +245,10 @@ var poemRoutes              = require('./routes/poems.js');
       res.render('facebook/home', { user: req.user });
     });
 
-  app.get('/facebook/login',
-    function(req, res){
-      res.render('facebook/login');
-    });
+  // app.get('/facebook/login',
+  //   function(req, res){
+  //     res.render('facebook/login');
+  //   });
 
   app.get('/login/facebook',
     passport.authenticate('facebook'));
@@ -204,3 +264,29 @@ var poemRoutes              = require('./routes/poems.js');
     function(req, res){
       res.render('facebook/profile', { user: req.user });
     });
+
+// -----------------------------------------------------------------------------
+
+    app.get('/test',
+      function(req, res){
+        res.render('test');
+      });
+
+    // ----------------------------------------------------------------------------
+    // SPDY
+    // ----------------------------------------------------------------------------
+    var options = {
+        key: fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/privkey.pem'),
+        cert:  fs.readFileSync('/etc/letsencrypt/live/www1.brentpayton.com/fullchain.pem')
+    };
+
+    spdy
+      .createServer(options, app)
+      .listen(port, (error) => {
+        if (error) {
+          console.error(error);
+          return process.exit(1);
+        } else {
+          console.log('Listening on port: ' + port + '.');
+        }
+      });

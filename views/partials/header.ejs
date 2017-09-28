@@ -18,7 +18,8 @@
     </script>
     <script src="/js/main.js"> </script>
     <!--CSS-->
-    <%# <link
+    <%# Removed in order to use "superhero" CSS theme instead.
+      <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -36,16 +37,18 @@
         </div>
         <div class='collapse navbar-collapse'>
           <ul class='navbar-nav navbar-right nav'>
-            <% if(!currentUser) { %>
-              <li><a href='/login/facebook'>Log In With Facebook</a></li>
-              <li><a href='/login'>Log In</a></li>
-              <li><a href='/register'>Sign Up</a></li>
-            <% } else { %>
+            <% if (typeof user === 'undefined' && typeof currentUser !== 'undefined') { %>
               <li><a href='#'>Signed in as <%= currentUser.username %></a></li>
+              <% if (currentUser.administrator) { %>
+                <li><a href='/users'>User Managment</a></li>
+              <% } %>
               <li><a href='/logout'>Log Out</a></li>
-            <% } %>
-            <% if(currentUser && currentUser.administrator) { %>
-              <li><a href='/users'>User Managment</a></li>
+            <% } else if (typeof user !== 'undefined') { %>
+              <li><a href='#'>Signed in as <%= user.displayName %></a></li>
+              <li><a href='/logout'>Log Out</a></li>
+            <% } else { %>
+              <li><a href='/login/facebook'>Log In With Facebook</a></li>
+              <li><a href='/login'>Log In With Local Account</a></li>
             <% } %>
           </ul>
         </div>
