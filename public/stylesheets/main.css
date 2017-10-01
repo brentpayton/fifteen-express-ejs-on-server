@@ -16,6 +16,7 @@
 
 .usertable .row:nth-child(2n+3) {
   background: lightgray;
+  color: black;
 }
 
 

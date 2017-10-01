@@ -24,21 +24,21 @@ var expressSession        = require('express-session');
                             }));
 var moment                = require('moment');
 var promise               = require('bluebird');
-const port                = 3010;
+var port                  = 3010;
 
 // ----------------------------------------------------------------------------
 // Facebook Login (Not OAuth)
 // ----------------------------------------------------------------------------
-const Guid = require('guid');
-const Mustache  = require('mustache');
-const Request  = require('request');
-const Querystring  = require('querystring');
+var Guid = require('guid');
+var Mustache  = require('mustache');
+var Request  = require('request');
+var Querystring  = require('querystring');
 var csrf_guid = Guid.raw();
-const account_kit_api_version = 'v1.00';
-const app_id = '1957965834451520';
-const app_secret = '64306eb0e0e97ae10b4445d0d986d890';
-const me_endpoint_base_url = 'https://graph.accountkit.com/v1.0/me';
-const token_exchange_base_url = 'https://graph.accountkit.com/v1.0/access_token';
+var account_kit_api_version = 'v1.00';
+var app_id = '1957965834451520';
+var app_secret = '64306eb0e0e97ae10b4445d0d986d890';
+var me_endpoint_base_url = 'https://graph.accountkit.com/v1.0/me';
+var token_exchange_base_url = 'https://graph.accountkit.com/v1.0/access_token';
 
 function loadLogin() {
   return fs.readFileSync('public/fblogin.html').toString();
@@ -115,7 +115,7 @@ var User                  = require('./models/user.js');
 var Poem                  = require('./models/poem.js');
 
 //------------------------------------------------------------------------------
-// Facebook OAuth
+// Facebook Passport/OAuth
 //------------------------------------------------------------------------------
 
 // Configure the Facebook strategy for use by Passport.
@@ -136,7 +136,6 @@ passport.use(new Strategy({
     // be associated with a user record in the application's database, which
     // allows for account linking and authentication with other identity
     // providers.
-    // console.log(profile); // BKP:  Doesn't work.
     return cb(null, profile);
   }));
 
@@ -245,6 +244,7 @@ var poemRoutes              = require('./routes/poems.js');
       res.render('facebook/home', { user: req.user });
     });
 
+  // Just displays a page with a login link.
   // app.get('/facebook/login',
   //   function(req, res){
   //     res.render('facebook/login');
