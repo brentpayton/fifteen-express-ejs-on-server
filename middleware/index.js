@@ -1,4 +1,4 @@
-var Campground            = require('../models/campground');
+// var Campground            = require('../models/campground');
 var Comment               = require('../models/comment');
 var User                  = require('../models/user');
 var Poem                  = require('../models/poem');
@@ -88,11 +88,12 @@ middlewareObj.isAdmin = function isAdmin(req, res, next){
       if (err) {
         console.log(err);
       } else {
-        if (foundUser.administrator) {
+        // if (foundUser.administrator) {
+        if (foundUser.admin) {
           next();
         } else {
           req.flash('error', "You don't have permission to do that");
-          res.redirect('/campgrounds');
+          res.redirect('/poems');
         }
       }
     });

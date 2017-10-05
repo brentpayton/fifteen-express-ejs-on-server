@@ -37,19 +37,33 @@
         </div>
         <div class='collapse navbar-collapse'>
           <ul class='navbar-nav navbar-right nav'>
-            <% if (typeof user === 'undefined' && typeof currentUser !== 'undefined') { %>
+            <%# Local user %>
+            <% if (currentUser && currentUser.username) { %>
               <li><a href='#'>Signed in as <%= currentUser.username %></a></li>
+              <% if (currentUser.admin) { %>
+                <li><a href='/users'>User Managment</a></li>
+              <% } %>
+              <li><a href='/logout'>Log Out</a></li>
+            <% } %>
+
+            <%# Facebook user %>
+            <% if (currentUser && currentUser.name) { %>
+              <li><a href='#'>Signed in as <%= currentUser.name %></a></li>
               <% if (currentUser.administrator) { %>
                 <li><a href='/users'>User Managment</a></li>
               <% } %>
               <li><a href='/logout'>Log Out</a></li>
-            <% } else if (typeof user !== 'undefined') { %>
-              <li><a href='#'>Signed in as <%= user.displayName %></a></li>
-              <li><a href='/logout'>Log Out</a></li>
-            <% } else { %>
+            <% } %>
+            <% if (!currentUser) { %>
               <li><a href='/login/facebook'>Log In With Facebook</a></li>
               <li><a href='/login'>Log In With Local Account</a></li>
+              <li><a href='/register'>Sign Up</a></li>
             <% } %>
+            <!--
+            <% if (currentUser) { %>
+              <li>User ID:  <%= currentUser._id %> </li>
+            <% } %>
+            -->
           </ul>
         </div>
       </div>
