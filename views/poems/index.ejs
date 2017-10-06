@@ -16,11 +16,14 @@
     <% poems.forEach(function(poem){ %>
       <div class='col-md-3 col-sm-6 fifteencard'>
         <div class='caption'>
-          <h4> <%= poem.title %> </h4>
+          <!-- <h4> <%= poem.title %> </h4> -->
+          <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
         </div>
+        <!--
         <div style="text-align: left;">
-          <a href='/poems/<%= poem._id %>' class='btn btn-primary'>View</a>
+          <a href='/poems/<%= poem._id %>' class='btn btn-primary btn-sm'>View</a>
         </div>
+        -->
         <div style="text-align: left;">
           <p> <%= poem.content.substring(0,100) %> . . .  </p>
         </div>

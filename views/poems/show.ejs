@@ -22,12 +22,13 @@
       <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
       <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit'>
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-          Edit Poem</a>
+          <span class="glyphicon glyphicon-edit btn btn-sm" aria-hidden="true"></span>
+          Edit</a>
+
         <form class='delete-form pull-right' action='/poems/<%= poem._id %>?_method=DELETE' method="POST">
           <button class='btn btn-danger'>
-          <span class="glyphicon glyphicon-remove"></span>
-          Delete Poem</button>
+          <span class="glyphicon glyphicon-remove btn btn-sm"></span>
+          Delete</button>
         </form>
       <% } %>
       <hr>
