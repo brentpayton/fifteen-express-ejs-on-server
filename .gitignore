@@ -6,4 +6,5 @@ node_modules/
 npm-debug.log
 
 credentials.json
-mongo.js
+mongoDev.js
+mongoProd.js
