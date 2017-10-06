@@ -30,9 +30,17 @@ var port                  = 3010;
 // ----------------------------------------------------------------------------
 // Mongoose
 // ----------------------------------------------------------------------------
-var mongoose              = require('mongoose');
-                            mongoose.connect('mongodb://mongodb://fifteenlines:password@ds147034.mlab.com:47034/fifteenlines_dev');
-mongoose.Promise          = Promise;
+
+var mongo = require('./mongo.js')
+// var opts = {
+//     server: {
+//         socketOptions: { keepAlive: 1 }
+//     }
+// };
+// var mongoose              = require('mongoose');
+//                             mongoose.connect('mongodb://mongodb://fifteenlines:password@ds147034.mlab.com:47034/fifteenlines_dev', opts);
+//                             // mongoose.connect(credentials.mongo.dev);
+// mongoose.Promise          = Promise;
 
 // ----------------------------------------------------------------------------
 // Models
