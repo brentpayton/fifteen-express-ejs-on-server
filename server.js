@@ -30,8 +30,19 @@ var port                  = 3010;
 // ----------------------------------------------------------------------------
 // Mongoose
 // ----------------------------------------------------------------------------
-var mongo = require('./mongoDev.js');  // Excluded from source control.
-// var mongo = requi  re('./mongoProd.js');  // Excluded from source control.
+// var mongo = require('./mongoDev.js');  // Excluded from source control.
+// var mongo = require('./mongoProd.js');  // Excluded from source control.
+
+switch(app.get('env')) {
+    case 'development':
+        var mongo = require('./mongoDev.js');
+        break;
+    case 'production':
+        var mongo = require('./mongoProd.js');
+        break;
+    default:
+        throw new error('Unknown execution environment: ', app.get('env'));
+}
 
 // ----------------------------------------------------------------------------
 // Models
