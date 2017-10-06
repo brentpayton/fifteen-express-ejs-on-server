@@ -12,7 +12,6 @@ var app                   = express();
                             app.set('view engine', 'ejs');
                             app.use(express.static(__dirname + '/public'));
 var bodyParser            = require('body-parser');
-// For Facebook Login
 var credentials           = require('./credentials.json');
 var passport              = require('passport'),
     // TwitterStrategy       = require('passport-twitter').Strategy,
@@ -20,7 +19,7 @@ var passport              = require('passport'),
 //
 var expressSession        = require('express-session');
                             app.use(expressSession({
-                              secret              : 'seattle',
+                              secret              : credentials.expressSession,
                               resave              : false,
                               saveUninitialized   : false
                             }));
