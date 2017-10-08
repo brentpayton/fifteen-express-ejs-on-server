@@ -20,11 +20,23 @@
         <div class="form-group">
           <input type='password' class="form-control" name='password' placeholder='Password'>
         </div>
-        <button class="btn btn-primary" type="submit">Sign Up</button>
+        <p>
+          <script src="//www.google.com/recaptcha/api.js" async defer></script>
+          <div class="g-recaptcha" data-sitekey="6LciljMUAAAAAO0i0yE7IxRZzZOonQFgI62icNKO" data-callback="enableBtn"></div>
+        </p>
+        <button class="btn btn-primary" type="submit" id="button1" name="button1">Sign Up</button>
       </form>
     </div>
   </div>
 
 </div>
+
+<script>
+  document.getElementById('button1').disabled = true;
+
+  function enableBtn() {
+    document.getElementById('button1').disabled = false;
+  }
+</script>
 
 <% include partials/footer %>

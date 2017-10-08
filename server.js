@@ -30,9 +30,6 @@ var port                  = 3010;
 // ----------------------------------------------------------------------------
 // Mongoose
 // ----------------------------------------------------------------------------
-// var mongo = require('./mongoDev.js');  // Excluded from source control.
-// var mongo = require('./mongoProd.js');  // Excluded from source control.
-
 switch(app.get('env')) {
     case 'development':
         var mongo = require('./mongoDev.js');
