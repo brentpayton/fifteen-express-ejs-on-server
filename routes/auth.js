@@ -5,6 +5,8 @@ var User                  = require('../models/user');
 
 // ----------------------------------------------------------------------------
 // reCAPTCHA
+// Not certain all of the reCAPTCHA code in this module is needed but taking
+// it out will be tedious and it isn't doing any harm.
 // ----------------------------------------------------------------------------
 var credentials           = require('../credentials.json');
 var Recaptcha             = require('../lib/express-recaptcha');
