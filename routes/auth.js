@@ -5,8 +5,6 @@ var User                  = require('../models/user');
 
 // ----------------------------------------------------------------------------
 // reCAPTCHA
-// Not certain all of the reCAPTCHA code in this module is needed but taking
-// it out will be tedious and it isn't doing any harm.
 // ----------------------------------------------------------------------------
 var credentials           = require('../credentials.json');
 var Recaptcha             = require('../lib/express-recaptcha');
@@ -43,9 +41,10 @@ router.get('/register', recaptcha.middleware.render, (req, res) => {
 
 router.post('/register', recaptcha.middleware.verify, function(req, res) {
   var newUser = new User({
-      username: req.body.username,
-      email:    req.body.email,
-      administrator: false});
+      username:       req.body.username,
+      email:          req.body.email,
+      provider:       'local',
+      admin:          false});
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       req.flash('error', err.message);
