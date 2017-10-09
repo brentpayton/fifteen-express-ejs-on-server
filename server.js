@@ -55,12 +55,13 @@ passport.use(new FacebookStrategy({
     clientID: credentials.facebook.app_id,
     clientSecret: credentials.facebook.app_secret,
     callbackURL: credentials.facebook.callback,
-    profileFields:['id','displayName','emails']
+    profileFields:['id', 'displayName', 'emails']
     }, function(accessToken, refreshToken, profile, done) {
         console.log(profile);
         var me = new user({
-            email:profile.emails[0].value,
-            name:profile.displayName
+            // email:profile.emails[0].value,
+            provider:profile.provider,
+            username:profile.displayName
         });
 
         /* save if new */

@@ -5,7 +5,7 @@ var uniqueValidator       = require('mongoose-unique-validator');
 // var UserSchema = new mongoose.Schema({
 var UserSchema = mongoose.Schema({
   id:             String,
-  username:       String, // passport-local-mongoose ensures unique user names.
+  username:       { type: String, unique: true, uniqueCaseInsensitive: true },
   password:       String,
   email:          { type: String, unique: true, uniqueCaseInsensitive: true },
   provider:       String,
@@ -14,8 +14,6 @@ var UserSchema = mongoose.Schema({
 { timestamps: true });
 
 UserSchema.plugin(passportLocalMongoose);
-// UserSchema.plugin(uniqueValidator);
-// UserSchema.plugin(uniqueValidator, { message: 'Expected email address to be unique.' });
 UserSchema.plugin(uniqueValidator, { message: 'Expected {PATH} to be unique.' });
 
 module.exports = mongoose.model('User', UserSchema);
