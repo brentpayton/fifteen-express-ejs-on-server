@@ -55,13 +55,13 @@ passport.use(new FacebookStrategy({
     clientID: credentials.facebook.app_id,
     clientSecret: credentials.facebook.app_secret,
     callbackURL: credentials.facebook.callback,
-    profileFields:['id', 'displayName', 'emails']
+    profileFields:['id', 'displayName', 'name', 'email']
     }, function(accessToken, refreshToken, profile, done) {
         console.log(profile);
         var me = new user({
-            // email:profile.emails[0].value,
+            email:profile.emails[0].value,
             provider:profile.provider,
-            username:profile.displayName
+            username:profile.displayName,
         });
 
         /* save if new */
@@ -182,7 +182,7 @@ app.get('/facebook',
   });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { scope: ['email'] }));
 
 app.get('/login/facebook/return',
   passport.authenticate('facebook', { failureRedirect: '/' }),
