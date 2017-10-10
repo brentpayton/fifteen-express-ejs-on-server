@@ -27,15 +27,25 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
   var title         = req.body.title;
   var description   = req.body.description;
   var content       = req.body.content;
+  var l1w1          = req.body.l1w1;
+  var l1w2          = req.body.l1w2;
+  var l1w3          = req.body.l1w3;
+  var l1w4          = req.body.l1w4;
+  var l1w5          = req.body.l1w5;
   var author = {
     id: req.user._id,
     username: req.user.username
   };
   var newPoem = {
-    title: title,
+    title:       title,
     description: description,
-    content: content,
-    author: author};
+    l1w1:        l1w1,
+    l1w2:        l1w2,
+    l1w3:        l1w3,
+    l1w4:        l1w4,
+    l1w5:        l1w5,
+    content:     content,
+    author:      author};
   Poem.create(newPoem, function(err, createdPoem) {
     if (err) {
       console.log(err);
