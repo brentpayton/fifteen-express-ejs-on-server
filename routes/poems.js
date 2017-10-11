@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
-// Create
+// Create 
 // ----------------------------------------------------------------------------
 router.get('/new', middleware.isLoggedIn, function(req, res) {
   res.render('poems/new');
@@ -25,8 +25,7 @@ router.get('/new', middleware.isLoggedIn, function(req, res) {
 
 router.post('/', middleware.isLoggedIn, function(req, res) {
   var title         = req.body.title;
-  var description   = req.body.description;
-  var content       = req.body.content;
+  var wordsPerLine  = req.body.wordsPerLine;
   var l1w1          = req.body.l1w1;
   var l1w2          = req.body.l1w2;
   var l1w3          = req.body.l1w3;
@@ -37,15 +36,14 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
     username: req.user.username
   };
   var newPoem = {
-    title:       title,
-    description: description,
-    l1w1:        l1w1,
-    l1w2:        l1w2,
-    l1w3:        l1w3,
-    l1w4:        l1w4,
-    l1w5:        l1w5,
-    content:     content,
-    author:      author};
+    title:        title,
+    wordsPerLine: wordsPerLine,
+    l1w1:         l1w1,
+    l1w2:         l1w2,
+    l1w3:         l1w3,
+    l1w4:         l1w4,
+    l1w5:         l1w5,
+    author:       author};
   Poem.create(newPoem, function(err, createdPoem) {
     if (err) {
       console.log(err);
