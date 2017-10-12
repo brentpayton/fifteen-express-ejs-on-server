@@ -22,12 +22,12 @@
       <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
       <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit'>
-          <span class="glyphicon glyphicon-edit btn btn-sm" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           Edit</a>
 
         <form class='delete-form pull-right' action='/poems/<%= poem._id %>?_method=DELETE' method="POST">
           <button class='btn btn-danger'>
-          <span class="glyphicon glyphicon-remove btn btn-sm"></span>
+          <span class="glyphicon glyphicon-remove"></span>
           Delete</button>
         </form>
       <% } %>
@@ -113,7 +113,10 @@
       <div class="text-center"><em>Created <%= poem.createdAt %></em></div>
     </div>
   </div>
-
+  <a href="/" class="btn btn-primary">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    Back</a>
+</div>
 </div>
 
 <% include ../partials/footer %>
