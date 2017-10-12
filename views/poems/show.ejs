@@ -13,18 +13,20 @@
     <div class='col-md-8 col-md-offset-2'>
       <div class='caption-full'>
         <h3><a><%= poem.title %></a></h3>
-        <p><em>Submitted by <%= poem.author.username %></em></p>
+        <p><em>Created by <%= poem.author.username %></em></p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class='col-md-8 col-md-offset-2'>
       <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
-      <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
+      <% if (currentUser){ %>
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit'>
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           Edit</a>
+      <% } %>
 
+      <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
         <form class='delete-form pull-right' action='/poems/<%= poem._id %>?_method=DELETE' method="POST">
           <button class='btn btn-danger'>
           <span class="glyphicon glyphicon-remove"></span>
@@ -32,91 +34,100 @@
         </form>
       <% } %>
       <hr>
-
-      <% var wordsPerLine = poem.wordsPerLine %>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l1w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l2w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l3w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l4w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l5w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l6w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l7w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l8w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l9w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l10w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l11w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l12w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l13w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l14w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <div>
-        <% for (var i = 0; i < wordsPerLine; i++) { %>
-          <%= poem['l15w' + (i + 1)] %>
-        <% } %>
-      </div>
-      <hr>
+    </div>
+  </div>
+  <div class='row'>
+    <% var wordsPerLine = poem.wordsPerLine %>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l1w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l2w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l3w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l4w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l5w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l6w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l7w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l8w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l9w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l10w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l11w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l12w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l13w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l14w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <div class='col-md-8 col-md-offset-2'>
+      <% for (var i = 0; i < wordsPerLine; i++) { %>
+        <%= poem['l15w' + (i + 1)] %>
+      <% } %>
+    </div>
+    <hr>
+  </div>
+  <div class='row'>
+    <div class='col-md-8 col-md-offset-2'>
       <div class="text-center"><em>Created <%= poem.createdAt %></em></div>
     </div>
   </div>
-  <a href="/" class="btn btn-primary">
-    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-    Back</a>
-</div>
-</div>
+  <div class='row'>
+      <div class='col-md-8 col-md-offset-2'>
+        <a href="/" class="btn btn-primary">
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+          Back</a>
+      </div>
+    </div>
+</div> <%# End container %>
+
 
 <% include ../partials/footer %>
