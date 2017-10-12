@@ -32,8 +32,83 @@
         </form>
       <% } %>
       <hr>
-      <div><%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %></div>
-      <div><%- poem.content %></div>
+
+      <% var wordsPerLine = poem.wordsPerLine %>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l1w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l2w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l3w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l4w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l5w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l6w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l7w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l8w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l9w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l10w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l11w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l12w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l13w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l14w' + (i + 1)] %>
+        <% } %>
+      </div>
+      <div>
+        <% for (var i = 0; i < wordsPerLine; i++) { %>
+          <%= poem['l15w' + (i + 1)] %>
+        <% } %>
+      </div>
       <hr>
       <div class="text-center"><em>Created <%= poem.createdAt %></em></div>
     </div>
