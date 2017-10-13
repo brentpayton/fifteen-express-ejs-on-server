@@ -16,48 +16,59 @@ grunt.initConfig({
 		wget: {
 			cmd: 'wget',
 			args: [
-				'localhost:3000',
-				'--recursive',
-				'--no-host-directories',
-				'--directory-prefix=temp',
-				'--level=0',
-				'--no-verbose',
-				'--html-extension'
+				'--config=wgetrc',
+				'dev.fifteenlines.com'
 			]
+		},
+		blc: {
+			cmd: './node_modules/.bin/blc',
+			args: [
+				'https://dev.fifteenlines.com',
+				'--filter-level 3 ',
+				'--ordered ',
+				'--recursive ',
+				'--exclude *.php',
+				'--verbose',
+				'--follow'
+			]
+		}
+	},
+	htmllint: {
+		root: {
+			src: "temp/*.html"
+		},
+		all: {
+			src: [ 'temp/*.html' ]
 		},
 	},
 	bootlint: {
 		options: {
 			showallerrors: true
 		},
-		files: ['temp/*.html', 'temp/poems/*.html']
+		files: ['temp/*.html']
 	},
 	csslint: {
-		src: ['public/stylesheets/*.css']
+		src: ['stylesheets/main.css']
 	},
 	linkChecker: {
 		options: {
 			maxConcurrency: 20
 		},
 	  default: {
-	    site: 'localhost',
+	    site: 'dev.fifteenlines.com',
 	    options: {
-	      initialPort: 3000
+	      initialPort: 443
 	    }
 	  }
-	},
-  htmllint: {
-    all: ["temp/**/*.html"]
-  }
+	}
 });
 
 	grunt.registerTask('test', function () {
 	    var tasks = [
         'run:wget',
-				'htmllint',
+				'htmllint:all',
 				'bootlint',
-				'csslint',
-				'linkChecker'
+				'csslint'
 	    ];
 
 	    tasks.forEach(function (task) {
@@ -85,7 +96,4 @@ grunt.initConfig({
 
 	// Grunt dead link checker
 	grunt.loadNpmTasks('grunt-link-checker');
-
-	// Grunt HTML Linter
-	grunt.loadNpmTasks('grunt-html');
 };

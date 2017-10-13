@@ -8,3 +8,4 @@ npm-debug.log
 credentials.json
 mongoDev.js
 mongoProd.js
+temp

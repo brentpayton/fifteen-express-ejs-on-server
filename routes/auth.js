@@ -29,7 +29,7 @@ router.post('/register', recaptcha.middleware.verify, function(req, res) {
       res.redirect('/register');
     } else {
       passport.authenticate('local')(req, res, function() {
-        req.flash('success', 'Welcome to FifteenLines!, ' + user.username);
+        req.flash('success', 'Welcome to Fifteenlines, ' + user.username + '!');
         res.redirect('/poems');
       });
     }
