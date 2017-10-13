@@ -9,6 +9,7 @@
         Back</a>
     </div>
   </div>
+
   <div class="row">
     <div class='col-md-8 col-md-offset-2'>
       <div class='caption-full'>
@@ -17,25 +18,43 @@
       </div>
     </div>
   </div>
+
   <div class="row">
-    <div class='col-md-8 col-md-offset-2'>
       <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
-      <% if (currentUser){ %>
+    <% if (currentUser){ %>
+      <div class='col-xs-6' style="border: thin solid lightgray;">
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit'>
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           Edit</a>
-      <% } %>
-
-      <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
-        <form class='delete-form pull-right' action='/poems/<%= poem._id %>?_method=DELETE' method="POST">
-          <button class='btn btn-danger'>
-          <span class="glyphicon glyphicon-remove"></span>
-          Delete</button>
-        </form>
-      <% } %>
-      <hr>
-    </div>
-  </div>
+      </div>
+    <% } %>
+    <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
+      <div class='col-xs-6' style="border: thin solid lightgray;">
+        <form action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
+            <label>Poem Visibility:  </label>
+            <input
+              type='radio'
+              name='poem[isHidden]'
+              value='true'
+              <% if(poem.isHidden) { %>
+                checked
+              <% } %>
+            > Hidden
+            <input
+              type='radio'
+              name='poem[isHidden]'
+              value='false'
+              <% if(!poem.isHidden) { %>
+                checked
+              <% } %>
+            > Visible
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      <br />
+  <% } %>
+  <hr />
   <div class='row'>
     <% var wordsPerLine = poem.wordsPerLine %>
     <div class='col-md-8 col-md-offset-2'>

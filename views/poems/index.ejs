@@ -2,7 +2,7 @@
 
 <div class='container'>
 
-  <!--Control visibility of add poem button based on whether a user is logged in or not.-->
+  <!-- Control visibility of add poem button based on whether a user is logged in or not. -->
   <% if (currentUser){ %>
     <div class='row'>
       <div>
@@ -14,15 +14,17 @@
   <!-- Display previews of all poems -->
   <div class='row text-center'>
     <% poems.forEach(function(poem){ %>
-      <div class='col-md-3 col-sm-6 fifteencard'>
-        <div class='caption'>
-          <!-- <h4> <%= poem.title %> </h4> -->
-          <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
+      <% if (!poem.isHidden) { %>
+        <div class='col-md-3 col-sm-6 fifteencard'>
+          <div class='caption'>
+            <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
+            Hidden:  <%= poem.isHidden %>
+          </div>
+          <div style="text-align: left;">
+            <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
+          </div>
         </div>
-        <div style="text-align: left;">
-          <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
-        </div>
-      </div>
+      <% } %>
     <% }); %>
   </div>
 
