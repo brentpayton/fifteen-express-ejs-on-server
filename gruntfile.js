@@ -82,7 +82,9 @@ grunt.initConfig({
 				'htmllint',
 				'bootlint',
 				'csslint',
-				'run:blc'
+				'run:blc',
+				'jshint',
+				'ejslint'
 	    ];
 
 	    tasks.forEach(function (task) {
