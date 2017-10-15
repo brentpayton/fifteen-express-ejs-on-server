@@ -35,7 +35,7 @@ grunt.initConfig({
 			]
 		},
 		blc: {
-			cmd: './node_modules/.bin/blc',
+			cmd: 'blc',
 			args: [
 				'https://dev.fifteenlines.com',
 				'--filter-level 3 ',
@@ -77,7 +77,8 @@ grunt.initConfig({
         'run:wget',
 				'htmllint',
 				'bootlint',
-				'csslint'
+				'csslint',
+				'run:blc'
 	    ];
 
 	    tasks.forEach(function (task) {
