@@ -13,8 +13,6 @@ grunt.initConfig({
 		}
 	},
 	run: {
-		//wget --no-verbose --show-progress --recursive --level inf --tries 3 --convert-links --no-host-directories --directory-prefix=temp --page-requisites --wait 2 --random-wait dev.fifteenlines.com
-
 		wget: {
 			cmd: 'wget',
 			args: [
@@ -69,7 +67,10 @@ grunt.initConfig({
 	      initialPort: 443
 	    }
 	  }
-	}
+	},
+	jshint: {
+    all: ['gruntfile.js', 'server.js', 'public/js/main.js', 'middleware/index.js', 'models/*.js', 'routes/*.js']
+  }
 });
 
 	grunt.registerTask('test', function () {
@@ -106,4 +107,7 @@ grunt.initConfig({
 
 	// Grunt dead link checker
 	grunt.loadNpmTasks('grunt-link-checker');
+
+	// Linter for JavaScript
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 };

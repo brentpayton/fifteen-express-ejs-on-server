@@ -9,7 +9,7 @@ var campgroundSchema = new mongoose.Schema({
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }, 
+    },
     username: String
   },
   comments:       [
@@ -18,6 +18,6 @@ var campgroundSchema = new mongoose.Schema({
       ref: 'Comment'
     }
   ]
-})
+});
 
 module.exports = mongoose.model('Campground', campgroundSchema);

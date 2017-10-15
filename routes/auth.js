@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 var express               = require('express');
 var router                = express.Router({mergeParams: true});
 var passport              = require('passport');
@@ -14,7 +16,7 @@ var recaptcha             = new Recaptcha(credentials.reCAPTCHA.site_key, creden
 // Register
 // ----------------------------------------------------------------------------
 router.get('/register', recaptcha.middleware.render, (req, res) => {
-    res.render('register', { captcha: res.recaptcha })
+    res.render('register', { captcha: res.recaptcha });
 });
 
 router.post('/register', recaptcha.middleware.verify, function(req, res) {

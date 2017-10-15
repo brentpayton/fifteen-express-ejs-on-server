@@ -1,3 +1,6 @@
+/* jshint strict: true */
+/* jshint esversion: 6 */
+
 // ----------------------------------------------------------------------------
 // Express
 // ----------------------------------------------------------------------------
@@ -57,6 +60,7 @@ passport.use(new FacebookStrategy({
     callbackURL: credentials.facebook.callback,
     profileFields:['id', 'displayName', 'name', 'email']
     }, function(accessToken, refreshToken, profile, done) {
+        "use strict";
         console.log(profile);
         var me = new user({
             email:profile.emails[0].value,
@@ -83,11 +87,13 @@ passport.use(new FacebookStrategy({
 // User serialize/deserialize
 // ----------------------------------------------------------------------------
 passport.serializeUser(function(user, done) {
+    "use strict";
     console.log(user);
     done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
+    "use strict";
     user.findById(id, function(err, user) {
         done(err, user);
     });
@@ -127,6 +133,7 @@ var flash                 = require('connect-flash');
 // Make 'currentUser' and 'message' available to every route
 // ----------------------------------------------------------------------------
 app.use(function(req, res, next) {
+  "use strict";
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
@@ -176,6 +183,7 @@ var userRoutes            = require('./routes/users.js');
 // ----------------------------------------------------------------------------
 app.get('/facebook',
   function(req, res) {
+    "use strict";
     res.render('facebook/home', { user: req.user });
   });
 
@@ -185,12 +193,14 @@ app.get('/login/facebook',
 app.get('/login/facebook/return',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
+    "use strict";
     res.redirect('/');
   });
 
 app.get('/facebook/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
+    "use strict";
     res.render('facebook/profile', { user: req.user });
   });
 
@@ -205,6 +215,7 @@ var options = {
 spdy
   .createServer(options, app)
   .listen(port, (error) => {
+    "use strict";
     if (error) {
       console.error(error);
       return process.exit(1);
