@@ -70,7 +70,10 @@ grunt.initConfig({
 	},
 	jshint: {
     all: ['gruntfile.js', 'server.js', 'public/js/main.js', 'middleware/index.js', 'models/*.js', 'routes/*.js']
-  }
+  },
+	ejslint: {
+			target: ['views/**/*.ejs']
+	}
 });
 
 	grunt.registerTask('test', function () {
@@ -108,6 +111,11 @@ grunt.initConfig({
 	// Grunt dead link checker
 	grunt.loadNpmTasks('grunt-link-checker');
 
-	// Linter for JavaScript
+	// Linter for JavaScript files
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+
+	// Linter for ejs
+	grunt.loadNpmTasks('grunt-ejslint');
+
+
 };
