@@ -48,12 +48,7 @@ grunt.initConfig({
 		}
 	},
 	htmllint: {
-		all: {
-			src: [ "temp/*.html", "temp/poems/*.html" ]
-		},
-		root: {
-			src: "temp/*.html"
-		},
+		src: [ "temp/*.html", "temp/poems/*.html" ],
 	},
 	bootlint: {
 		options: {
@@ -80,7 +75,7 @@ grunt.initConfig({
 	grunt.registerTask('test', function () {
 	    var tasks = [
         'run:wget',
-				'htmllint:all',
+				'htmllint',
 				'bootlint',
 				'csslint'
 	    ];
