@@ -1,9 +1,8 @@
 // ----------------------------------------------------------------------------
 // Express
 // ----------------------------------------------------------------------------
+process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
 var express               = require('express');
-
-var user                  = require('./models/user');
 var passport              = require('passport');
 var Strategy              = require('passport-facebook').Strategy;
 var fs                    = require('fs');
@@ -44,9 +43,10 @@ switch(app.get('env')) {
 // ----------------------------------------------------------------------------
 // Models
 // ----------------------------------------------------------------------------
-var Comment               = require('./models/comment.js');
-var User                  = require('./models/user.js');
-var Poem                  = require('./models/poem.js');
+var Comment               = require('./models/comment');
+var User                  = require('./models/user');
+var user                  = require('./models/user');
+var Poem                  = require('./models/poem');
 
 // ----------------------------------------------------------------------------
 // Facebook Auth
@@ -103,8 +103,6 @@ var passport              = require('passport');
                             passport.serializeUser(User.serializeUser());
                             passport.deserializeUser(User.deserializeUser());
                             passport.use(new LocalStrategy(User.authenticate()));
-// var bodyParser            = require('body-parser');
-//                             app.use(bodyParser.urlencoded({extended: true}));
 
 // ----------------------------------------------------------------------------
 // EJS

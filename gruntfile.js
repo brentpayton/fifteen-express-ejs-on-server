@@ -13,10 +13,24 @@ grunt.initConfig({
 		}
 	},
 	run: {
+		//wget --no-verbose --show-progress --recursive --level inf --tries 3 --convert-links --no-host-directories --directory-prefix=temp --page-requisites --wait 2 --random-wait dev.fifteenlines.com
+
 		wget: {
 			cmd: 'wget',
 			args: [
-				'--config=wgetrc',
+				'--no-verbose',
+				// '--show-progress',
+				'--recursive',
+				// '--level=inf',
+				// '--tries=3',
+				'--convert-links',
+				'--no-host-directories',
+				'--directory-prefix=temp',
+				'--page-requisites',
+				// '--wait=2',
+				'--adjust-extension',
+				'--retry-connrefused',
+				'--save-headers=off',
 				'dev.fifteenlines.com'
 			]
 		},
@@ -34,21 +48,21 @@ grunt.initConfig({
 		}
 	},
 	htmllint: {
+		all: {
+			src: [ "temp/*.html", "temp/poems/*.html" ]
+		},
 		root: {
 			src: "temp/*.html"
-		},
-		all: {
-			src: [ 'temp/*.html' ]
 		},
 	},
 	bootlint: {
 		options: {
 			showallerrors: true
 		},
-		files: ['temp/*.html']
+		files: ['temp/*.html', 'temp/poems/*.html']
 	},
 	csslint: {
-		src: ['stylesheets/main.css']
+		src: ['temp/stylesheets/*.css']
 	},
 	linkChecker: {
 		options: {
