@@ -9,3 +9,4 @@ credentials.json
 mongoDev.js
 mongoProd.js
 temp
+~$project.xlsx
