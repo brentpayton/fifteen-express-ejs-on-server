@@ -71,9 +71,6 @@
             <%# Facebook user %>
             <% if (currentUser && currentUser.name) { %>
               <li class='pull-right'><a href='#'>Signed in as <%= currentUser.name %></a></li>
-              <% if (currentUser.administrator) { %>
-                <li class='pull-right'><a href='/users'>User Managment</a></li>
-              <% } %>
               <li class='pull-right'><a href='/logout'>Log Out</a></li>
             <% } %>
             <%# Not logged in %>
