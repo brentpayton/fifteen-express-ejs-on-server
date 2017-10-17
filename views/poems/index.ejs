@@ -14,7 +14,7 @@
   <!-- Display previews of all poems -->
   <div class='row text-center'>
     <% poems.forEach(function(poem){ %>
-      <% if (!poem.isHidden) { %>
+      <% if (!poem.hidden) { %>
         <div class='col-md-3 col-sm-6 fifteencard'>
           <div class='caption'>
             <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
