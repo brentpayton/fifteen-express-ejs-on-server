@@ -4,6 +4,7 @@
 // ----------------------------------------------------------------------------
 // Express
 // ----------------------------------------------------------------------------
+// Following line ensures smooth operation with 'forever' automation
 process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
 var express               = require('express');
 var passport              = require('passport');
