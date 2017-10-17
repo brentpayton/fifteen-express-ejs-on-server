@@ -22,14 +22,15 @@
   <div class="row">
       <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
     <% if (currentUser){ %>
-      <div class='col-xs-6' style="border: thin solid lightgray;">
+      <%# <div class='col-xs-6' style="border-right: thin solid lightgray;"> %>
+      <div class='col-xs-6'>
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit'>
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
           Edit</a>
       </div>
     <% } %>
     <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
-      <div class='col-xs-6' style="border: thin solid lightgray;">
+      <div class='col-xs-6'>
         <form action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
             <label>Poem Visibility:  </label>
             <input
@@ -53,13 +54,14 @@
         </div>
       </form>
       <br />
+  <% } else { %>
+    &nbsp;
   <% } %>
-  </div>
 
   <hr />
 
-  <div class='row'>
     <% var wordsPerLine = poem.wordsPerLine %>
+    <div class='row'>
 
     <% if (poem.l1w1 !=='') { -%>
       <div class='col-md-8 col-md-offset-2'>
