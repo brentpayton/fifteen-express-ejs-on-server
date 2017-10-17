@@ -39,6 +39,13 @@ router.post('/register', recaptcha.middleware.verify, function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
+// Register with no captcha for testing purposes
+// ----------------------------------------------------------------------------
+router.get('/register_no_captcha', recaptcha.middleware.render, (req, res) => {
+    res.render('register_no_captcha', { captcha: res.recaptcha });
+});
+
+// ----------------------------------------------------------------------------
 // Log in
 // ----------------------------------------------------------------------------
 router.get('/login', function(req, res) {
