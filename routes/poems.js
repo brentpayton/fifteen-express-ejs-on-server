@@ -17,6 +17,19 @@ router.get('/', function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
+// Admin
+// ----------------------------------------------------------------------------
+router.get('/admin', middleware.isAdmin, function(req, res) {
+  Poem.find({}, function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
 // Create
 // ----------------------------------------------------------------------------
 router.get('/new', middleware.isLoggedIn, function(req, res) {
@@ -337,7 +350,7 @@ router.put('/:id', function (req, res){
 // ----------------------------------------------------------------------------
 // Delete
 // ----------------------------------------------------------------------------
-router.delete('/:id', middleware.checkPoemOwnership, function (req, res) {
+router.delete('/:id', middleware.isAdmin, function (req, res) {
   Poem.findByIdAndRemove(req.params.id, function(err) {
     if (err) {
       console.log(err);
@@ -349,4 +362,7 @@ router.delete('/:id', middleware.checkPoemOwnership, function (req, res) {
   });
 });
 
+//------------------------------------------------------------------------------
+// Export
+//------------------------------------------------------------------------------
 module.exports = router;

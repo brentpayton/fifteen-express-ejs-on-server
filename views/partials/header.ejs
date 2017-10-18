@@ -64,7 +64,10 @@
             <% if (currentUser && currentUser.username) { %>
               <li class='pull-right'><a href='#'>Signed in as <%= currentUser.username %></a></li>
               <% if (currentUser.admin) { %>
-                <li class='pull-right'><a href='/users'>User Managment</a></li>
+                <li class='pull-right'><a href='/users'>User Management</a></li>
+              <% } %>
+              <% if (currentUser.admin) { %>
+                <li class='pull-right'><a href='/poems/admin'>Poem Management</a></li>
               <% } %>
               <li class='pull-right'><a href='/logout'>Log Out</a></li>
             <% } %>

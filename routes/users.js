@@ -4,7 +4,7 @@ var User                  = require('../models/user');
 var middleware            = require('../middleware');  // Contents of index.js automatically required
 
 //------------------------------------------------------------------------------
-// Show all users
+// Admin
 //------------------------------------------------------------------------------
 router.get('/users', middleware.isAdmin, function(req, res) {
   User.find({}, function(err, allUsers) {

@@ -20,7 +20,7 @@
   </div>
 
   <div class="row">
-      <!--Control visibility of poem Edit and Delete buttons based on logged-in user-->
+      <!--Control visibility of poem Edit and hide buttons based on logged-in user-->
     <% if (currentUser){ %>
       <%# <div class='col-xs-6' style="border-right: thin solid lightgray;"> %>
       <div class='col-xs-6'>
@@ -29,7 +29,7 @@
           Edit</a>
       </div>
     <% } %>
-    <% if (currentUser && poem.author.id.equals(currentUser._id)){ %>
+    <% if ((currentUser && poem.author.id.equals(currentUser._id)) || currentUser.admin){ %>
       <div class='col-xs-6'>
         <form action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
             <label>Poem Visibility:  </label>
