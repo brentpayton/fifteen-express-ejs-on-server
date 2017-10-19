@@ -56,7 +56,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href='/'>FifteenLines</a>
+          <a class='navbar-brand' href='/' id='home'>FifteenLines</a>
         </div>
         <div class='collapse navbar-collapse' id='mynavbar-content'>
           <ul class='nav navbar-nav'>
@@ -64,23 +64,23 @@
             <% if (currentUser && currentUser.username) { %>
               <li class='pull-right'><a href='#'>Signed in as <%= currentUser.username %></a></li>
               <% if (currentUser.admin) { %>
-                <li class='pull-right'><a href='/users'>User Management</a></li>
+                <li class='pull-right'><a href='/users' id='userManagement'>User Management</a></li>
               <% } %>
               <% if (currentUser.admin) { %>
-                <li class='pull-right'><a href='/poems/admin'>Poem Management</a></li>
+                <li class='pull-right'><a href='/poems/admin' id='poemManagement'>Poem Management</a></li>
               <% } %>
-              <li class='pull-right'><a href='/logout'>Log Out</a></li>
+              <li class='pull-right'><a href='/logout' id='logout'>Log Out</a></li>
             <% } %>
             <%# Facebook user %>
             <% if (currentUser && currentUser.name) { %>
               <li class='pull-right'><a href='#'>Signed in as <%= currentUser.name %></a></li>
-              <li class='pull-right'><a href='/logout'>Log Out</a></li>
+              <li class='pull-right'><a href='/logout' id='logout'>Log Out</a></li>
             <% } %>
             <%# Not logged in %>
             <% if (!currentUser) { %>
               <%# <li><a href='/login/facebook'>Log In With Facebook</a></li> %>
-              <li class='pull-right'><a href='/login'>Log In</a></li>
-              <li class='pull-right'><a href='/register'>Sign Up</a></li>
+              <li class='pull-right'><a href='/login' id='login'>Log In</a></li>
+              <li class='pull-right'><a href='/register' id='signup'>Sign Up</a></li>
             <% } %>
           </ul>
         </div>

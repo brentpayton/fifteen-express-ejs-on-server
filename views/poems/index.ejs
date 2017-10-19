@@ -6,7 +6,7 @@
   <% if (currentUser){ %>
     <div class='row'>
       <div>
-        <a class="btn btn-success center-block" href='/poems/new'>Add a new poem</a>
+        <a class="btn btn-success center-block" href='/poems/new' id='addPoem'>Add a poem</a>
       </div>
     </div>
   <% } %>
@@ -17,7 +17,7 @@
       <% if (!poem.hidden) { %>
         <div class='col-md-3 col-sm-6 fifteencard'>
           <div class='caption'>
-            <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
+            <h4> <a href='/poems/<%= poem._id %>' name="<%= poem.title %>"> <%= poem.title %> </a> </h4>
           </div>
           <div style="text-align: left;">
             <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
