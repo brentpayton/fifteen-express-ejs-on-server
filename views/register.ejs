@@ -53,7 +53,7 @@
         </div>
         <script src="//www.google.com/recaptcha/api.js" async defer></script>
         <div class="g-recaptcha" data-sitekey="6LciljMUAAAAAO0i0yE7IxRZzZOonQFgI62icNKO" data-callback="enableBtn"></div>
-        <button class="btn btn-primary" type="submit" id="signUp" name="button1">Sign Up</button>
+        <button class="btn btn-primary" type="submit" id="signUp" name="signUp">Sign Up</button>
       </form>
     </div>
   </div>
@@ -61,10 +61,10 @@
 </div>
 
 <script>
-  document.getElementById('button1').disabled = true;
+  document.getElementById('signUp').disabled = true;
 
   function enableBtn() {
-    document.getElementById('button1').disabled = false;
+    document.getElementById('signUp').disabled = false;
   }
 </script>
 

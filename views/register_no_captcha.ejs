@@ -1,24 +1,5 @@
 <% include partials/header %>
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '310397579428322',
-      xfbml      : true,
-      version    : 'v2.10'
-    });
-    FB.AppEvents.logPageView();
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-4">
@@ -50,9 +31,7 @@
         <div class="form-group">
           <input type='password' class="form-control" name='password' id='password' placeholder='Password'>
         </div>
-        <script src="//www.google.com/recaptcha/api.js" async defer></script>
-        <div class="g-recaptcha" data-sitekey="6LciljMUAAAAAO0i0yE7IxRZzZOonQFgI62icNKO" data-callback="enableBtn"></div>
-        <button class="btn btn-primary" type="submit" id="signUp" name="button1">Sign Up</button>
+        <button class="btn btn-primary" type="submit" id="signUp" name="signUp">Sign Up</button>
       </form>
     </div>
   </div>

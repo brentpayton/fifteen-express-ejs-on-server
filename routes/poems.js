@@ -357,7 +357,7 @@ router.delete('/:id', middleware.isAdmin, function (req, res) {
       res.redirect('/poems');
     } else {
       req.flash('success', 'Poem deleted');
-      res.redirect('/poems');
+      res.redirect('/poems/admin');
     }
   });
 });
