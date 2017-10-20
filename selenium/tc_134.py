@@ -1,14 +1,9 @@
 from selenium import webdriver
 import csv
 # -----------------------------------------------------------------------------
-# TC 134 - Create N new local accounts.
+# TC 134 - Basic log in / log out with pre-existing non-admin account
 #
-# By default uses randomly-generated account info from signup_10.csv which
-# must be in the same directory as this script.  This must be a simple CSV file
-# with user ID, email, and password columns.  No headers.
-# The default file was obtained from http://www.mockaroo.com/
-# All records found in the CSV file will be processed.  To change the number
-# of accounts created, simply generate or manipulate a CSV file.
+# By default uses the first entry from signup_10.csv from TC 133
 # -----------------------------------------------------------------------------
 
 datafile = 'signup_10.csv'
@@ -16,20 +11,20 @@ datafile = 'signup_10.csv'
 # Set things up
 driver = webdriver.Chrome('D:\Dropbox\WebDev\selenium\chromedriver.exe')
 driver.set_page_load_timeout(30)
-driver.get('https://dev.fifteenlines.com/register_no_captcha')
+driver.get('https://dev.fifteenlines.com/login')
 driver.implicitly_wait(20)
-users = csv.reader(open(datafile, 'r'))
-
-for row in users:
-        driver.find_element_by_id('username') \
-        .send_keys(row[0])
-    driver.find_element_by_id('email') \
-        .send_keys(row[1])
+# users = csv.reader(open(datafile, 'r'))
+with open(datafile) as f:
+    reader = csv.reader(f)
+    row1 = next(reader)
+    # print(row1[1])
+    # driver.find_element_by_id('login').click
+    assert "Log In" in driver.page_source
+    driver.find_element_by_id('username') \
+        .send_keys(row1[0])
     driver.find_element_by_id('password') \
-        .send_keys(row[2])
-    driver.find_element_by_id('signUp').click()
-    assert "Welcome to Fifteenlines" in driver.page_source
-    driver.find_element_by_id('logout').click()
-    driver.get('https://dev.fifteenlines.com/register_no_captcha')
-
-driver.quit()
+        .send_keys(row1[2])
+    driver.find_element_by_id('submit').click()
+    signedInAs = "Signed in as " + row1[0]
+    assert signedInAs in driver.page_source
+# driver.quit()
