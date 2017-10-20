@@ -21,8 +21,6 @@ assert "Add a poem" in driver.page_source
 
 # Navigate to the new poem page and create the new poem.
 driver.find_element_by_id('addPoem').click()
-# driver.find_element_by_id('title') \
-#     .send_keys('Test poem from TC 132')
 
 autoPoemTitle = rw.random_word()
 autoPoemTitle += ' '
@@ -35,7 +33,6 @@ driver.find_element_by_id('submit').click()
 assert "Poem added" in driver.page_source
 
 # Select the just-created poem from the homepage and edit it
-# driver.find_element_by_name('Test poem from TC 132').click()
 driver.find_element_by_name(autoPoemTitle).click()
 driver.find_element_by_id('editPoem').click()
 
