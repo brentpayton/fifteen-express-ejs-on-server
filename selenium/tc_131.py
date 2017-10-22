@@ -7,8 +7,10 @@ from selenium import webdriver
 # Should check for the presence of a flash message when the login succeeds.
 # -----------------------------------------------------------------------------
 
-driver = webdriver.Chrome('D:\Dropbox\WebDev\selenium\chromedriver.exe')
+# driver = webdriver.Chrome('D:\Dropbox\WebDev\selenium\chromedriver.exe')
+driver = webdriver.Firefox()
 # driver = webdriver.Ie('D:\Dropbox\WebDev\selenium\IEDriverServer.exe')
+# driver = webdriver.Edge()
 
 driver.set_page_load_timeout(30)
 driver.get('https://dev.fifteenlines.com/login')
@@ -19,12 +21,15 @@ driver.find_element_by_name('username') \
 driver.find_element_by_name('password') \
     .send_keys('password')
 driver.find_element_by_id('submit').click()
-assert "Add a new poem" in driver.page_source
-# driver.get_screenshot_as_file('tc_131_a.png')
+driver.get_screenshot_as_file('tc_131_a.png')
+assert "Add a poem" in driver.page_source
 # Navigate to user admin page
 driver.find_element_by_id('userManagement').click()
 assert 'All Users' in driver.page_source
 # Navigate to poem admin page
 driver.find_element_by_id('poemManagement').click()
 assert 'All Poems' in driver.page_source
+driver.find_element_by_id('logout').click()
+assert 'You have been logged out' in driver.page_source
+driver.get_screenshot_as_file('tc_131_b.png')
 driver.quit()
