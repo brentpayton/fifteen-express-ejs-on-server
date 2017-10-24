@@ -29,7 +29,7 @@
           Edit</a>
       </div>
     <% } %>
-    <% if ((currentUser && poem.author.id.equals(currentUser._id)) || currentUser.admin){ %>
+    <% if ((currentUser && poem.author.id.equals(currentUser._id)) || (currentUser && currentUser.admin)){ %>
       <div class='col-xs-6'>
         <form action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
             <label>Poem Visibility:  </label>
