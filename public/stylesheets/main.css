@@ -14,7 +14,7 @@
   display: inline;
 }
 
-.usertable .row:nth-child(2n+3) {
+.stripetable .row:nth-child(2n+3) {
   background: lightgray;
   color: black;
 }
