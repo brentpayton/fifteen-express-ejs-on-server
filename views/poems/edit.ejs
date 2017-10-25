@@ -2,120 +2,132 @@
 
 <div class='container'>
   <div class='row'>
-    <h1 style='text-align: center'>Editing "<%= poem.title %>"</h1>
     <div class="col-md-12">
       <a href='/poems/<%= poem._id %>' class="btn btn-primary">
         <span class="glyphicon glyphicon-arrow-left"></span>
         Back</a>
     </div>
+    <h1 style='text-align: center'>Editing "<%= poem.title %>"</h1>
     <div style='margin: 25px auto;'>
-      <form action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
-        <h3>Title</h3>
-        <div class='form-group'>
-          <input class='form-control' type='text' value='<%= poem.title %>' name='poem[title]' style="color: black;">
-        </div>
-        <h3>Poem</h3>
-        <% var wordsPerLine = poem.wordsPerLine %>
+      <form class='form-inline' action='/poems/<%= poem._id %>?_method=PUT' method='POST'>
 
+        <h3>Title</h3>
+        <div class='form-group' style='width: 100%;'>
+          <input class='form-control' style='width: 100%;' type='text' value='<%= poem.title %>' name='poem[title]' style="color: black;">
+        </div>
+
+        <h3>Poem</h3>
+
+        <% var wordsPerLine = poem.wordsPerLine %>
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 1 word <%- i+1 %>' value="<%= poem['l1w' + (i + 1)] %>" name='poem[l1w<%- i+1 %>]' id='l1w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 2 word <%- i+1 %>' value="<%= poem['l2w' + (i + 1)] %>" name='poem[l2w<%- i+1 %>]'  id='l2w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 3 word <%- i+1 %>' value="<%= poem['l3w' + (i + 1)] %>" name='poem[l3w<%- i+1 %>]' id='l3w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 4 word <%- i+1 %>' value="<%= poem['l4w' + (i + 1)] %>" name='poem[l4w<%- i+1 %>]' id='l4w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 5 word <%- i+1 %>' value="<%= poem['l5w' + (i + 1)] %>" name='poem[l5w<%- i+1 %>]' id='l5w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 6 word <%- i+1 %>' value="<%= poem['l6w' + (i + 1)] %>" name='poem[l6w<%- i+1 %>]' id='l6w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 7 word <%- i+1 %>' value="<%= poem['l7w' + (i + 1)] %>" name='poem[l7w<%- i+1 %>]' id='l7w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 8 word <%- i+1 %>' value="<%= poem['l8w' + (i + 1)] %>" name='poem[l8w<%- i+1 %>]' id='l8w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 9 word <%- i+1 %>' value="<%= poem['l9w' + (i + 1)] %>" name='poem[l9w<%- i+1 %>]' id='l9w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 10 word <%- i+1 %>' value="<%= poem['l10w' + (i + 1)] %>" name='poem[l10w<%- i+1 %>]' id='l10w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 11 word <%- i+1 %>' value="<%= poem['l11w' + (i + 1)] %>" name='poem[l11w<%- i+1 %>]' id='l11w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 12 word <%- i+1 %>' value="<%= poem['l12w' + (i + 1)] %>" name='poem[l12w<%- i+1 %>]' id='l12w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 13 word <%- i+1 %>' value="<%= poem['l13w' + (i + 1)] %>" name='poem[l13w<%- i+1 %>]' id='l13w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 14 word <%- i+1 %>' value="<%= poem['l14w' + (i + 1)] %>" name='poem[l14w<%- i+1 %>]' id='l14w<%- i+1 %>'>
           <% } %>
         </div>
-
+        <br />
+        <br />
         <div class='form-group'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
             <input class='form-control' type='text' placeholder='line 15 word <%- i+1 %>' value="<%= poem['l15w' + (i + 1)] %>" name='poem[l15w<%- i+1 %>]' id='l15w<%- i+1 %>'>
           <% } %>
         </div>
-
-        <div class='form-group'>
-          <button class='btn btn-primary btn-block' id='submit'>Submit</button>
+        <br />
+        <br />
+        <div class='form-group' style='width: 100%'>
+          <button class='btn btn-primary center-block' style='width: 100%' id='submit'>Submit</button>
         </div>
       </form>
-      <div class="col-md-12">
-        <a href='/poems/<%= poem._id %>' class="btn btn-primary">
-          <span class="glyphicon glyphicon-arrow-left"></span>
-          Back</a>
-      </div>
     </div>
   </div>
 </div>
