@@ -12,20 +12,31 @@
   <% } %>
 
   <!-- Display previews of all poems -->
-  <div class='row text-center'>
-    <% poems.forEach(function(poem){ %>
-      <% if (!poem.hidden) { %>
-        <div class='col-md-3 col-sm-6 fifteencard'>
-          <div class='caption'>
-            <h4> <a href='/poems/<%= poem._id %>' name="<%= poem.title %>"> <%= poem.title %> </a> </h4>
-          </div>
-          <div style="text-align: left;">
-            <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
-          </div>
-        </div>
-      <% } %>
-    <% }); %>
+  <div class='row'>
+    <div class='col-xs-3'>
+      <strong>title</strong>
+    </div>
+    <div class='col-xs-6'>
+      <strong>preview</strong>
+    </div>
+    <div class='col-xs-3'>
+      <strong>Started by</strong>
+    </div>
   </div>
+
+  <% poems.forEach(function(poem){ %>
+    <div class="row">
+      <div class='col-xs-3 wrap'>
+        <h4> <a href='/poems/<%= poem._id %>' name="<%= poem.title %>"> <%= poem.title %> </a> </h4>
+      </div>
+      <div class='col-xs-6 wrap'>
+        <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
+      </div>
+      <div class='col-xs-3 wrap'>
+        <%= poem.author.username %>
+      </div>
+    </div>
+  <% }) %>
 
 </div>
 
