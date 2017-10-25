@@ -10,3 +10,5 @@ mongoDev.js
 mongoProd.js
 temp
 ~$project.xlsx
+.cache
+__pycache__
