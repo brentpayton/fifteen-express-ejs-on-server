@@ -17,6 +17,45 @@ router.get('/', function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
+// Show all poems, sort by title
+// ----------------------------------------------------------------------------
+router.get('/bytitle', function(req, res) {
+  Poem.find({}).sort('title').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
+// Show all poems, sort by date
+// ----------------------------------------------------------------------------
+router.get('/bydate', function(req, res) {
+  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
+// Show all poems, sort by author
+// ----------------------------------------------------------------------------
+router.get('/byauthor', function(req, res) {
+  Poem.find({}).sort('author').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
 // Admin
 // ----------------------------------------------------------------------------
 router.get('/admin', middleware.isAdmin, function(req, res) {

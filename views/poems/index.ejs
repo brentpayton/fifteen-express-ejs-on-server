@@ -14,26 +14,32 @@
   <!-- Display previews of all poems -->
   <div class='row'>
     <div class='col-xs-3'>
-      <strong>title</strong>
+      <strong><a href="/poems/bytitle">title</a></strong>
     </div>
-    <div class='col-xs-6'>
+    <div class='col-xs-5'>
       <strong>preview</strong>
     </div>
-    <div class='col-xs-3'>
-      <strong>Started by</strong>
+    <div class='col-xs-2'>
+      <strong><a href="/poems/byauthor">started by</a></strong>
+    </div>
+    <div class='col-xs-2'>
+      <strong><a href="/poems/bydate">Date</a></strong>
     </div>
   </div>
-
+  <hr />
   <% poems.forEach(function(poem){ %>
     <div class="row">
       <div class='col-xs-3 wrap'>
         <h4> <a href='/poems/<%= poem._id %>' name="<%= poem.title %>"> <%= poem.title %> </a> </h4>
       </div>
-      <div class='col-xs-6 wrap'>
+      <div class='col-xs-5 wrap'>
         <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
       </div>
-      <div class='col-xs-3 wrap'>
+      <div class='col-xs-2 wrap'>
         <%= poem.author.username %>
+      </div>
+      <div class='col-xs-2 wrap'>
+        <%= poem.createdAt %>
       </div>
     </div>
   <% }) %>
