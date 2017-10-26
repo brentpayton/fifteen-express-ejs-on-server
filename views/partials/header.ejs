@@ -5,19 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FifteenLines</title>
-    <!--JS-->
+    <%# ----------------------------------------------------------------------%>
+    <%# JS >%>
+    <%# ----------------------------------------------------------------------%>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108760578-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-108760578-1');
+    </script>
+
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous">
     </script>
+
     <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous">
     </script>
     <script src="/js/main.js"> </script>
-    <!--CSS-->
+
+    <%# ----------------------------------------------------------------------%>
+    <%# CSS%>
+    <%# ----------------------------------------------------------------------%>
     <link
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     rel="stylesheet"
@@ -28,7 +43,10 @@
 
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link href='/stylesheets/main.css' rel='stylesheet'>
+
+    <%# ----------------------------------------------------------------------%>
     <%# Favicons %>
+    <%# ----------------------------------------------------------------------%>
     <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
@@ -47,8 +65,12 @@
     <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
   </head>
+
   <body>
-    <!--Navbar-->
+
+    <%# ----------------------------------------------------------------------%>
+    <%# Navbar%>
+    <%# ----------------------------------------------------------------------%>
     <nav class='navbar navbar-default'>
       <div class='container-fluid'>
         <div class='navbar-header'>
@@ -60,6 +82,11 @@
           </button>
           <a class='navbar-brand' href='/' id='home'>FifteenLines</a>
         </div>
+
+        <%# ------------------------------------------------------------------%>
+        <%# Display different navbar options depending on whether or not a user
+        is logged in and how.%>
+        <%# ------------------------------------------------------------------%>
         <div class='collapse navbar-collapse' id='mynavbar-content'>
           <ul class='nav navbar-nav'>
             <%# Local user %>
@@ -89,7 +116,9 @@
       </div>
     </nav>
 
-    <!--Flash messages-->
+    <%# ----------------------------------------------------------------------%>
+    <%# Flash messages%>
+    <%# ----------------------------------------------------------------------%>
     <div class='container'>
       <% if(error && error.length > 0){ %>
         <div class='alert alert-danger' role='alert'><%= error %></div>
