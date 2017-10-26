@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
 // Show all poems, sort by title
 // ----------------------------------------------------------------------------
 router.get('/bytitle', function(req, res) {
-  Poem.find({}).sort('title').exec(function(err, allPoems){
+  Poem.find({}).sort('title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {

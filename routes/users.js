@@ -4,10 +4,36 @@ var User                  = require('../models/user');
 var middleware            = require('../middleware');  // Contents of index.js automatically required
 
 //------------------------------------------------------------------------------
-// Admin
+// Admin interface list all users by default sort order
 //------------------------------------------------------------------------------
 router.get('/users', middleware.isAdmin, function(req, res) {
   User.find({}, function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+//------------------------------------------------------------------------------
+// Admin interface list all users by username
+//------------------------------------------------------------------------------
+router.get('/users/byname', middleware.isAdmin, function(req, res) {
+  User.find({}).sort('username').exec(function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+//------------------------------------------------------------------------------
+// Admin interface list all users by email
+//------------------------------------------------------------------------------
+router.get('/users/byemail', middleware.isAdmin, function(req, res) {
+  User.find({}).sort('email').exec(function(err, allUsers) {
     if(err) {
       console.log(err);
     } else {
