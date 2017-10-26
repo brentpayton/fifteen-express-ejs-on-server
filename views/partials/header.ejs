@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FifteenLines</title>
-    <%# ----------------------------------------------------------------------%>
-    <%# JS >%>
-    <%# ----------------------------------------------------------------------%>
+    <%# -------------------------------------------------------------------- -%>
+    <%# JS -%>
+    <%# -------------------------------------------------------------------- -%>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108760578-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'UA-108760578-1');
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-108760578-1');
     </script>
 
     <script
@@ -30,9 +30,9 @@
     </script>
     <script src="/js/main.js"> </script>
 
-    <%# ----------------------------------------------------------------------%>
-    <%# CSS%>
-    <%# ----------------------------------------------------------------------%>
+    <%# -------------------------------------------------------------------- -%>
+    <%# CSS -%>
+    <%# -------------------------------------------------------------------- -%>
     <link
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     rel="stylesheet"
@@ -44,9 +44,9 @@
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link href='/stylesheets/main.css' rel='stylesheet'>
 
-    <%# ----------------------------------------------------------------------%>
-    <%# Favicons %>
-    <%# ----------------------------------------------------------------------%>
+    <%# -------------------------------------------------------------------- -%>
+    <%# Favicons -%>
+    <%# -------------------------------------------------------------------- -%>
     <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
@@ -68,9 +68,9 @@
 
   <body>
 
-    <%# ----------------------------------------------------------------------%>
-    <%# Navbar%>
-    <%# ----------------------------------------------------------------------%>
+    <%# -------------------------------------------------------------------- -%>
+    <%# Navbar -%>
+    <%# -------------------------------------------------------------------- -%>
     <nav class='navbar navbar-default'>
       <div class='container-fluid'>
         <div class='navbar-header'>
@@ -83,47 +83,47 @@
           <a class='navbar-brand' href='/' id='home'>FifteenLines</a>
         </div>
 
-        <%# ------------------------------------------------------------------%>
+        <%# ---------------------------------------------------------------- -%>
         <%# Display different navbar options depending on whether or not a user
-        is logged in and how.%>
-        <%# ------------------------------------------------------------------%>
+        is logged in and how. -%>
+        <%# ---------------------------------------------------------------- -%>
         <div class='collapse navbar-collapse' id='mynavbar-content'>
           <ul class='nav navbar-nav'>
-            <%# Local user %>
-            <% if (currentUser && currentUser.username) { %>
-              <li class='pull-right'><a href='#'>Signed in as <%= currentUser.username %></a></li>
-              <% if (currentUser.admin) { %>
+            <%# Local user -%>
+            <% if (currentUser && currentUser.username) { -%>
+              <li class='pull-right'><a href='#'>Signed in as <%= currentUser.username -%></a></li>
+              <% if (currentUser.admin) { -%>
                 <li class='pull-right'><a href='/users' id='userManagementLink'>User Management</a></li>
-              <% } %>
-              <% if (currentUser.admin) { %>
+              <% } -%>
+              <% if (currentUser.admin) { -%>
                 <li class='pull-right'><a href='/poems/admin' id='poemManagementLink'>Poem Management</a></li>
-              <% } %>
+              <% } -%>
               <li class='pull-right'><a href='/logout' id='logout'>Log Out</a></li>
-            <% } %>
-            <%# Facebook user %>
-            <% if (currentUser && currentUser.name) { %>
-              <li class='pull-right'><a href='#'>Signed in as <%= currentUser.name %></a></li>
+            <% } -%>
+            <%# Facebook user -%>
+            <% if (currentUser && currentUser.name) { -%>
+              <li class='pull-right'><a href='#'>Signed in as <%= currentUser.name -%></a></li>
               <li class='pull-right'><a href='/logout' id='logout'>Log Out</a></li>
-            <% } %>
-            <%# Not logged in %>
-            <% if (!currentUser) { %>
-              <%# <li><a href='/login/facebook'>Log In With Facebook</a></li> %>
+            <% } -%>
+            <%# Not logged in -%>
+            <% if (!currentUser) { -%>
+              <%# <li><a href='/login/facebook'>Log In With Facebook</a></li> -%>
               <li class='pull-right'><a href='/login' id='login'>Log In</a></li>
               <li class='pull-right'><a href='/register' id='signup'>Sign Up</a></li>
-            <% } %>
+            <% } -%>
           </ul>
         </div>
       </div>
     </nav>
 
-    <%# ----------------------------------------------------------------------%>
-    <%# Flash messages%>
-    <%# ----------------------------------------------------------------------%>
+    <%# -------------------------------------------------------------------- -%>
+    <%# Flash messages -%>
+    <%# -------------------------------------------------------------------- -%>
     <div class='container'>
-      <% if(error && error.length > 0){ %>
-        <div class='alert alert-danger' role='alert'><%= error %></div>
-      <% } %>
-      <% if(success && success.length > 0){ %>
-        <div class='alert alert-success' role='alert'><%= success %></div>
-      <% } %>
+      <% if(error && error.length > 0){ -%>
+        <div class='alert alert-danger' role='alert'><%= error -%></div>
+      <% } -%>
+      <% if(success && success.length > 0){ -%>
+        <div class='alert alert-success' role='alert'><%= success -%></div>
+      <% } -%>
     </div>

@@ -19,9 +19,9 @@
     </div>
   </div>
 
-  <div class="row">
-      <!--Control visibility of poem Edit and hide buttons based on logged-in user-->
-    <% if (currentUser){ %>
+  <!--Control visibility of poem Edit and hide buttons based on logged-in user-->
+  <% if (currentUser){ %>
+    <div class="row">
       <%# <div class='col-xs-6' style="border-right: thin solid lightgray;"> %>
       <div class='col-xs-4 col-xs-offset-2'>
         <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit' id='editPoem'>
@@ -45,7 +45,7 @@
               type='radio'
               name='poem[hidden]'
               value='false'
-              <% if(!poem.hidden) { %>
+              <% if(poem.hidden) { %>
                 checked
               <% } %>
             > Visible
@@ -54,113 +54,128 @@
         </div>
       </form>
       <br />
+      <hr />
+    </div>
   <% } else { %>
+    <hr />
   <% } %>
-
-  <hr />
 
     <% var wordsPerLine = poem.wordsPerLine %>
     <div class='row'>
 
-    <% if (poem.l1w1 !=='') { -%>
+      <% if (poem.l1w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l1w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } %>
-    <% if (poem.l2w1 !=='') { -%>
+
+    <% if (poem.l2w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l2w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l3w1 !=='') { -%>
+
+    <% if (poem.l3w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l3w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l4w1 !=='') { -%>
+
+    <% if (poem.l4w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l4w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l5w1 !=='') { -%>
+
+    <% if (poem.l5w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l5w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l6w1 !=='') { -%>
+
+    <% if (poem.l6w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l6w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l7w1 !=='') { -%>
+
+    <% if (poem.l7w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l7w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l8w1 !=='') { -%>
+
+    <% if (poem.l8w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l8w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l9w1 !=='') { -%>
+
+    <% if (poem.l9w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l9w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l10w1 !=='') { -%>
+
+    <% if (poem.l10w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l10w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l11w1 !=='') { -%>
+
+    <% if (poem.l11w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l11w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l12w1 !=='') { -%>
+
+    <% if (poem.l12w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l12w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l13w1 !=='') { -%>
+
+    <% if (poem.l13w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l13w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l14w1 !=='') { -%>
+
+    <% if (poem.l14w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l14w' + (i + 1)] -%>
         <% } -%>
       </div>
     <% } -%>
-    <% if (poem.l15w1 !=='') { -%>
+
+    <% if (poem.l15w1) { -%>
       <div class='col-md-8 col-md-offset-2'>
         <% for (var i = 0; i < wordsPerLine; i++) { -%>
           <%= poem['l15w' + (i + 1)] -%>

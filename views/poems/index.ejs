@@ -30,7 +30,7 @@
   <% poems.forEach(function(poem){ %>
     <div class="row">
       <div class='col-xs-3 wrap'>
-        <h4> <a href='/poems/<%= poem._id %>' name="<%= poem.title %>"> <%= poem.title %> </a> </h4>
+        <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
       </div>
       <div class='col-xs-5 wrap'>
         <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
