@@ -66,8 +66,8 @@ with open(datafile) as f:
 # Click the first poem on the homepage.
 # -----------------------------------------------------------------------------
 driver.find_element_by_css_selector(
-    'body > div:nth-child(3) > div > ' +
-    'div:nth-child(1) > div.caption > h4 > a').click()
+    'body > div.container.stripetable > div:nth-child(4) > ' +
+    'div.col-xs-3.wrap > h4 > a').click()
 
 assert 'editPoem' in driver.page_source
 assert 'Poem Visibility' not in driver.page_source
