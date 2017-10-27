@@ -14,23 +14,29 @@
   <!-- Display previews of all poems -->
   <div class='row'>
     <div class='col-xs-3'>
-      <strong><a href="/poems/bytitle">title</a></strong>
+      <a href="/poems/byTitle"> ▲ </a>
+      <strong> &nbsp; title &nbsp; </strong>
+      <a href="/poems/byTitleReverse"> ▼ </a>
     </div>
     <div class='col-xs-5'>
       <strong>preview</strong>
     </div>
     <div class='col-xs-2'>
-      <strong><a href="/poems/byauthor">started by</a></strong>
+      <a href="/poems/byAuthor"> ▲ </a>
+      <strong>started by</a></strong>
+      <a href="/poems/byAuthorReverse"> ▼ </a>
     </div>
     <div class='col-xs-2'>
-      <strong><a href="/poems/bydate">Date</a></strong>
+      <strong><a href="/poems/byDate"> ▲ </a></strong>
+      <strong>Date</strong>
+      <strong><a href="/poems/byDateReverse"> ▼ </a></strong>
     </div>
   </div>
   <hr />
   <% poems.forEach(function(poem){ %>
     <div class="row">
       <div class='col-xs-3 wrap'>
-        <h4> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h4>
+        <h5> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h5>
       </div>
       <div class='col-xs-5 wrap'>
         <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...

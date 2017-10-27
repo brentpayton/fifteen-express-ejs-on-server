@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var poemSchema = new mongoose.Schema({
   title:        String,
+  normalized:   String,
   isComplete:   Boolean,
   hidden:       { type: Boolean, default: false },
   timeCreated:  { type : Date, default: Date.now },

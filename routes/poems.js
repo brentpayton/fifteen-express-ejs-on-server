@@ -19,8 +19,10 @@ router.get('/', function(req, res) {
 // ----------------------------------------------------------------------------
 // Show all poems, sort by title
 // ----------------------------------------------------------------------------
-router.get('/bytitle', function(req, res) {
-  Poem.find({}).sort('title').exec(function(err, allPoems) {
+router.get('/byTitle', function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .sort('title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {
@@ -29,11 +31,10 @@ router.get('/bytitle', function(req, res) {
   });
 });
 
-// ----------------------------------------------------------------------------
-// Show all poems, sort by date
-// ----------------------------------------------------------------------------
-router.get('/bydate', function(req, res) {
-  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+router.get('/byTitleReverse', function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .sort('-title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {
@@ -45,8 +46,45 @@ router.get('/bydate', function(req, res) {
 // ----------------------------------------------------------------------------
 // Show all poems, sort by author
 // ----------------------------------------------------------------------------
-router.get('/byauthor', function(req, res) {
-  Poem.find({}).sort('author').exec(function(err, allPoems){
+router.get('/byAuthor', function(req, res) {
+  Poem.find()
+  .collation({locale: "en" })
+  .sort('author').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/byAuthorReverse', function(req, res) {
+  Poem.find()
+  .collation({locale: "en" })
+  .sort('-author').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
+// Show all poems, sort by date
+// ----------------------------------------------------------------------------
+router.get('/byDate', function(req, res) {
+  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/byDateReverse', function(req, res) {
+  Poem.find({}).sort('-createdAt').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
