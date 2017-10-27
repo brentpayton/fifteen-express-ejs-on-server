@@ -43,6 +43,30 @@ router.get('/byTitleReverse', function(req, res) {
   });
 });
 
+router.get('/adminByTitle', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .sort('title').exec(function(err, allPoems) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/adminByTitleReverse', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .sort('-title').exec(function(err, allPoems) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
 // ----------------------------------------------------------------------------
 // Show all poems, sort by author
 // ----------------------------------------------------------------------------
@@ -70,6 +94,30 @@ router.get('/byAuthorReverse', function(req, res) {
   });
 });
 
+router.get('/adminByAuthor', middleware.isAdmin, function(req, res) {
+  Poem.find()
+  .collation({locale: "en" })
+  .sort('author').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/adminByAuthorReverse', middleware.isAdmin, function(req, res) {
+  Poem.find()
+  .collation({locale: "en" })
+  .sort('-author').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
 // ----------------------------------------------------------------------------
 // Show all poems, sort by date
 // ----------------------------------------------------------------------------
@@ -89,6 +137,49 @@ router.get('/byDateReverse', function(req, res) {
       console.log(err);
     } else {
       res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/adminByDate', middleware.isAdmin, function(req, res) {
+  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/adminByDateReverse', middleware.isAdmin, function(req, res) {
+  Poem.find({}).sort('-createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/Admin', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
+// Show all poems, sort by hidden.  Admin interface only.
+// ----------------------------------------------------------------------------
+router.get('/adminByHidden', middleware.isAdmin, function(req, res) {
+  Poem.find({}).sort('hidden').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/adminByHiddenReverse', middleware.isAdmin, function(req, res) {
+  Poem.find({}).sort('-hidden').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/admin', {poems: allPoems});
     }
   });
 });

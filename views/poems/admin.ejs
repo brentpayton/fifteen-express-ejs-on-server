@@ -12,17 +12,28 @@
     <div class='col-xs-1'>
       <strong>&nbsp;</strong>
     </div>
-    <div class='col-xs-4'>
-      <strong>title</strong>
+    <div class='col-xs-2'>
+      <a href="/poems/adminByTitle"> ▲ </a>
+      <strong> &nbsp; title &nbsp; </strong>
+      <a href="/poems/adminByTitleReverse"> ▼ </a>
     </div>
-    <div class='col-xs-5'>
-      <strong>first line</strong>
+    <div class='col-xs-3'>
+      <strong>preview</strong>
     </div>
-    <div class='col-xs-1'>
-      <strong>author</strong>
+    <div class='col-xs-2'>
+      <a href="/poems/adminByAuthor"> ▲ </a>
+      <strong>started by</a></strong>
+      <a href="/poems/adminByAuthorReverse"> ▼ </a>
     </div>
-    <div class='col-xs-1'>
+    <div class='col-xs-2'>
+      <strong><a href="/poems/adminByDate"> ▲ </a></strong>
+      <strong>Date</strong>
+      <strong><a href="/poems/adminByDateReverse"> ▼ </a></strong>
+    </div>
+    <div class='col-xs-2'>
+      <strong><a href="/poems/adminByHidden"> ▲ </a></strong>
       <strong>hidden</strong>
+      <strong><a href="/poems/adminByHiddenReverse"> ▼ </a></strong>
     </div>
   </div>
 
@@ -36,16 +47,19 @@
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Del</button>
         </form>
       </div>
-      <div class='col-xs-4 wrap'>
+      <div class='col-xs-2 wrap'>
         <%= poem.title %>
       </div>
-      <div class='col-xs-5 wrap'>
+      <div class='col-xs-3 wrap'>
         <%= poem.l1w1 %> <%= poem.l1w2 %> <%= poem.l1w3 %> <%= poem.l1w4 %> <%= poem.l1w5 %>
       </div>
-      <div class='col-xs-1 wrap'>
+      <div class='col-xs-2 wrap'>
         <%= poem.author.username %>
       </div>
-      <div class='col-xs-1 wrap'>
+      <div class='col-xs-2 wrap'>
+        <%= poem.createdAt %>
+      </div>
+      <div class='col-xs-2 wrap'>
         <%= poem.hidden %>
       </div>
     </div>

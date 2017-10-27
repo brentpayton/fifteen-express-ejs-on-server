@@ -19,8 +19,20 @@ router.get('/users', middleware.isAdmin, function(req, res) {
 //------------------------------------------------------------------------------
 // Admin interface list all users by username
 //------------------------------------------------------------------------------
-router.get('/users/byname', middleware.isAdmin, function(req, res) {
-  User.find({}).sort('username').exec(function(err, allUsers) {
+router.get('/users/byName', middleware.isAdmin, function(req, res) {
+  User.find()
+    .collation({locale: "en" })
+    .sort('username').exec(function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+router.get('/users/byNameReverse', middleware.isAdmin, function(req, res) {
+  User.find({}).sort('-username').exec(function(err, allUsers) {
     if(err) {
       console.log(err);
     } else {
@@ -32,8 +44,49 @@ router.get('/users/byname', middleware.isAdmin, function(req, res) {
 //------------------------------------------------------------------------------
 // Admin interface list all users by email
 //------------------------------------------------------------------------------
-router.get('/users/byemail', middleware.isAdmin, function(req, res) {
-  User.find({}).sort('email').exec(function(err, allUsers) {
+router.get('/users/byEmail', middleware.isAdmin, function(req, res) {
+  User.find({})
+    .collation({locale: "en" })
+    .sort('email').exec(function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+router.get('/users/byEmailReverse', middleware.isAdmin, function(req, res) {
+  User.find({})
+    .collation({locale: "en" })
+    .sort('-email').exec(function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+//------------------------------------------------------------------------------
+// Admin interface list all users by admin permissions
+//------------------------------------------------------------------------------
+router.get('/users/byAdmin', middleware.isAdmin, function(req, res) {
+  User.find({})
+    .collation({locale: "en" })
+    .sort('admin').exec(function(err, allUsers) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('users/index', {users: allUsers});
+    }
+  });
+});
+
+router.get('/users/byAdminReverse', middleware.isAdmin, function(req, res) {
+  User.find({})
+    .collation({locale: "en" })
+    .sort('-admin').exec(function(err, allUsers) {
     if(err) {
       console.log(err);
     } else {
