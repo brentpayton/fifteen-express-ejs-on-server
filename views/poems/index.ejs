@@ -14,22 +14,16 @@
   <!-- Display previews of all poems -->
   <div class='row'>
     <div class='col-xs-3'>
-      <a href="/poems/byTitle"> ▲ </a>
-      <strong> &nbsp; title &nbsp; </strong>
-      <a href="/poems/byTitleReverse"> ▼ </a>
+      <strong> <a href='#' id='toggleTitle' onClick='toggleTitle()'>title</a> </strong>
     </div>
     <div class='col-xs-5'>
       <strong>preview</strong>
     </div>
     <div class='col-xs-2'>
-      <a href="/poems/byAuthor"> ▲ </a>
-      <strong>started by</a></strong>
-      <a href="/poems/byAuthorReverse"> ▼ </a>
+      <strong> <a href='#' id='toggleAuthor' onClick='toggleAuthor()'>started by</a> </strong>
     </div>
     <div class='col-xs-2'>
-      <strong><a href="/poems/byDate"> ▲ </a></strong>
-      <strong>Date</strong>
-      <strong><a href="/poems/byDateReverse"> ▼ </a></strong>
+      <strong> <a href='#' id='toggleDate' onClick='toggleDate()'>date</a> </strong>
     </div>
   </div>
   <hr />
