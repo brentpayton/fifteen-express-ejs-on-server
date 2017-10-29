@@ -156,7 +156,7 @@ router.get('/adminByDateReverse', middleware.isAdmin, function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render('poems/Admin', {poems: allPoems});
+      res.render('poems/admin', {poems: allPoems});
     }
   });
 });
