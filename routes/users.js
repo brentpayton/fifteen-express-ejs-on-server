@@ -19,7 +19,7 @@ router.get('/users', middleware.isAdmin, function(req, res) {
 //------------------------------------------------------------------------------
 // Admin interface list all users by username
 //------------------------------------------------------------------------------
-router.get('/users/byName', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByName', middleware.isAdmin, function(req, res) {
   User.find()
     .collation({locale: "en" })
     .sort('username').exec(function(err, allUsers) {
@@ -31,7 +31,7 @@ router.get('/users/byName', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/users/byNameReverse', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByNameReverse', middleware.isAdmin, function(req, res) {
   User.find({}).sort('-username').exec(function(err, allUsers) {
     if(err) {
       console.log(err);
@@ -44,7 +44,7 @@ router.get('/users/byNameReverse', middleware.isAdmin, function(req, res) {
 //------------------------------------------------------------------------------
 // Admin interface list all users by email
 //------------------------------------------------------------------------------
-router.get('/users/byEmail', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByEmail', middleware.isAdmin, function(req, res) {
   User.find({})
     .collation({locale: "en" })
     .sort('email').exec(function(err, allUsers) {
@@ -56,7 +56,7 @@ router.get('/users/byEmail', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/users/byEmailReverse', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByEmailReverse', middleware.isAdmin, function(req, res) {
   User.find({})
     .collation({locale: "en" })
     .sort('-email').exec(function(err, allUsers) {
@@ -71,7 +71,7 @@ router.get('/users/byEmailReverse', middleware.isAdmin, function(req, res) {
 //------------------------------------------------------------------------------
 // Admin interface list all users by admin permissions
 //------------------------------------------------------------------------------
-router.get('/users/byAdmin', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByAdmin', middleware.isAdmin, function(req, res) {
   User.find({})
     .collation({locale: "en" })
     .sort('admin').exec(function(err, allUsers) {
@@ -83,7 +83,7 @@ router.get('/users/byAdmin', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/users/byAdminReverse', middleware.isAdmin, function(req, res) {
+router.get('/users/adminByAdminReverse', middleware.isAdmin, function(req, res) {
   User.find({})
     .collation({locale: "en" })
     .sort('-admin').exec(function(err, allUsers) {

@@ -70,3 +70,38 @@ function adminToggleHidden() {
     window.location.href = 'https://dev.fifteenlines.com/poems/adminByHiddenReverse';
   }
 }
+
+// -----------------------------------------------------------------------------
+// User admin sort order toggles
+// -----------------------------------------------------------------------------
+function adminToggleUsername() {
+  if (window.location.href.indexOf("adminByNameReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByName';
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByNameReverse';
+  }
+}
+
+function adminToggleEmail() {
+  if (window.location.href.indexOf("adminByEmailReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByEmail';
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByEmailReverse';
+  }
+}
+
+function adminToggleAdmin() {
+  if (window.location.href.indexOf("adminByAdminReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByAdmin';
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/users/adminByAdminReverse';
+  }
+}
+
+function adminToggleHidden() {
+  if (window.location.href.indexOf("adminByHiddenReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHidden';
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHiddenReverse';
+  }
+}
