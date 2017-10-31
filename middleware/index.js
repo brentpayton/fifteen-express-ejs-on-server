@@ -13,7 +13,7 @@ middlewareObj.checkPoemOwnership = function(req, res, next) {
         req.flash('error', err);
         res.redirect('/poems');
       } else {
-        // Check if user is the author of the campground entry
+        // Check if user is the author of the poem entry
         if (foundPoem.author.id.equals(req.user._id)) {
           next();
         } else {
