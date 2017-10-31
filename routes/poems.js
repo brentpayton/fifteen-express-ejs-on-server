@@ -474,7 +474,7 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
 // generate fatal errors.
 // ----------------------------------------------------------------------------
 router.get('/:id', function(req, res) {
-  // Find campground with provided id
+  // Find poem with provided id
   Poem.findById(req.params.id).exec(function(err, foundPoem) {
     if(err) {
       console.log(err);
@@ -488,7 +488,6 @@ router.get('/:id', function(req, res) {
 // ----------------------------------------------------------------------------
 // Update
 // ----------------------------------------------------------------------------
-// router.get('/:id/edit', middleware.checkPoemOwnership, function(req, res) {
 router.get('/:id/edit', function(req, res) {
   Poem.findById(req.params.id, function(err, foundPoem) {
     if (err) {
@@ -499,7 +498,6 @@ router.get('/:id/edit', function(req, res) {
   });
 });
 
-// router.put('/:id', middleware.checkPoemOwnership, function (req, res){
 router.put('/:id', function (req, res){
   Poem.findByIdAndUpdate(
     req.params.id,
