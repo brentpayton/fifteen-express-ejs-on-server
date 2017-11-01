@@ -23,7 +23,7 @@
   <% if (currentUser){ %>
     <div class="row">
       <div class='col-xs-9 col-xs-offset-3'>
-        <a class='btn btn-warning' href='/poems/<%= poem._id %>/edit' id='editPoem'>
+        <a class='btn btn-warning' href='/poems/<%= poem._id %>/<%= poem.lineBeingEdited %>/edit' id='editPoem'>
           <span class="glyphicon glyphicon-edit"></span>
           Edit</a>
       </div>
@@ -61,7 +61,7 @@
       </div> <%# End column %>
     </div> <%# End row %>
   <% } else { %>
-    &nbsp
+    &nbsp;
   <% } %>
 
     <% var wordsPerLine = poem.wordsPerLine %>

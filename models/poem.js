@@ -6,6 +6,7 @@ var poemSchema = new mongoose.Schema({
   hidden:       { type: Boolean, default: false },
   timeCreated:  { type : Date, default: Date.now },
   wordsPerLine: Number,
+  lineBeingEdited: Number,
   l1w1:         String,
   l1w2:         String,
   l1w3:         String,
