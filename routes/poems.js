@@ -504,7 +504,7 @@ router.get('/:id/edit', function(req, res) {
 //   }
 // });
 
-router.get('/:id/:lineBeingEdited/edit', function(req, res) {
+router.get('/:id/edit', function(req, res) {
   // Find poem with provided id
   Poem.findById(req.params.id).exec(function(err, foundPoem) {
     if(err) {
