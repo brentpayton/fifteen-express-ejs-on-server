@@ -13,14 +13,6 @@
       document.getElementById('line' + j).style.display = 'none';
     }
 
-    if (<%= poem.lineBeingEdited %> > 1) {
-      var k = <%= poem.lineBeingEdited %> -1;
-      var tailSelector = 'poem.l' + k + 'w' + <%= poem.wordsPerLine %>;
-      // console.log(tailSelector);
-      var tail = '<%= poem.l3w5 %>'
-      // console.log(tail);
-    }
-
     document.getElementById('lineBeingEdited').value = <%= poem.lineBeingEdited + 1 %>;
 
   });
@@ -44,7 +36,7 @@
 
         <% if (poem.lineBeingEdited > 1) { %>
           <h3>Tail</h3>
-          <%= poem['l' + poem.lineBeingEdited + 'w' + poem.wordsPerLine] %>
+          <%= poem['l' + (poem.lineBeingEdited -1) + 'w' + poem.wordsPerLine] %>
         <% } %>
 
         <h3>Poem</h3>
@@ -52,7 +44,8 @@
         <% var wordsPerLine = poem.wordsPerLine %>
 
         <div class='form-group' id='nextLine'>
-            <input class='form-control' type='text' name = 'lineBeingEdited' id = 'lineBeingEdited'>
+          Next line:
+          <input class='form-control' type='text' name = 'lineBeingEdited' id = 'lineBeingEdited'>
         </div>
 
         <div class='form-group' id='line1'>
