@@ -498,23 +498,18 @@ router.get('/:id/edit', function(req, res) {
   });
 });
 
-// router.get('/:id/:line/edit', function(req, res) {
-//   if (req.params.line == 1) {
-//     fields = 'title wordsPerLine l1w1 l1w2 l1w3 l1w4 l1w5 l2w1';
-//   }
+// router.get('/:id/edit', function(req, res) {
+//   // Find poem with provided id
+//   Poem.findById(req.params.id).exec(function(err, foundPoem) {
+//     if(err) {
+//       console.log(err);
+//       req.flash('error', err);
+//     } else {
+//       // Render the 'edit' template with info retrieved from the DB
+//       res.render('poems/edit', {poem: foundPoem});
+//     }
+//   });
 // });
-
-router.get('/:id/edit', function(req, res) {
-  // Find poem with provided id
-  Poem.findById(req.params.id).exec(function(err, foundPoem) {
-    if(err) {
-      console.log(err);
-    } else {
-      // Render the 'edit' template with info retrieved from the DB
-      res.render('poems/edit', {poem: foundPoem});
-    }
-  });
-});
 
 router.put('/:id', function (req, res){
   Poem.findByIdAndUpdate(
@@ -525,6 +520,7 @@ router.put('/:id', function (req, res){
       console.log(err);
       res.redirect('/poems');
     } else {
+      console.log(req.body.poem);
       req.flash('success', 'Poem updated');
       res.redirect('/poems/' + req.params.id);
     }
