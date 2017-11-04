@@ -3,16 +3,19 @@
 <script>
   $(document).ready(function(){
     i = <%= poem.lineBeingEdited %>;
-    if (i > 1) {
-      for (i = 1; i < <%= poem.lineBeingEdited %>; i++ ) {
-        document.getElementById('line' + i).style.display = 'none';
+
+    if (i < 16)
+    {
+      if (i > 1) {
+        for (i = 1; i < <%= poem.lineBeingEdited %>; i++ ) {
+          document.getElementById('line' + i).style.display = 'none';
+        }
+      }
+      var j = <%= poem.lineBeingEdited %> + 1;
+      for (j; j < 16; j++) {
+        document.getElementById('line' + j).style.display = 'none';
       }
     }
-    var j = <%= poem.lineBeingEdited %> + 1;
-    for (j; j < 16; j++) {
-      document.getElementById('line' + j).style.display = 'none';
-    }
-
     document.getElementById('lineBeingEdited').value = <%= poem.lineBeingEdited + 1 %>;
     document.getElementById('lineBeingEdited').style.display = 'none';
 
