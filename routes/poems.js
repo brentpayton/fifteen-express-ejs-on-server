@@ -17,9 +17,26 @@ router.get('/', function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
+// Show poems by title with pagination
+// ----------------------------------------------------------------------------
+router.get('/byTitle/:skip/:limit', function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('title').exec(function(err, allPoems) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/index', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
 // Show all poems, sort by title
 // ----------------------------------------------------------------------------
-router.get('/byTitle', function(req, res) {
+router.get('/byTitleOld', function(req, res) {
   Poem.find()
     .collation({locale: "en" })
     .sort('title').exec(function(err, allPoems) {
@@ -497,19 +514,6 @@ router.get('/:id/edit', function(req, res) {
     res.render('poems/edit', {poem: foundPoem});
   });
 });
-
-// router.get('/:id/edit', function(req, res) {
-//   // Find poem with provided id
-//   Poem.findById(req.params.id).exec(function(err, foundPoem) {
-//     if(err) {
-//       console.log(err);
-//       req.flash('error', err);
-//     } else {
-//       // Render the 'edit' template with info retrieved from the DB
-//       res.render('poems/edit', {poem: foundPoem});
-//     }
-//   });
-// });
 
 router.put('/:id', function (req, res){
   Poem.findByIdAndUpdate(
