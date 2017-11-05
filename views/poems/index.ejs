@@ -2,7 +2,7 @@
 
 <div class='container stripetable'>
 
-  <!-- Control visibility of add poem button based on whether a user is logged in or not. -->
+  <%# Control visibility of add poem button based on whether a user is logged in or not. %>
   <% if (currentUser){ %>
     <div class='row'>
       <div>
@@ -11,7 +11,7 @@
     </div>
   <% } %>
 
-  <!-- Display previews of all poems -->
+  <%# Display previews of all poems %>
   <div class='row'>
     <div class='col-xs-3'>
       <strong> <a href='#' id='toggleTitle' onClick='toggleTitle()'>title</a> </strong>
@@ -33,7 +33,22 @@
         <h5> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h5>
       </div>
       <div class='col-xs-5 wrap'>
-        <%- poem.l1w1 %> <%- poem.l1w2 %> <%- poem.l1w3 %> <%- poem.l1w4 %> <%- poem.l1w5 %> ...
+        <% if (poem.lineBeingEdited == 1) { %>
+          <div class='newpoem'>new</div>
+        <% } %>
+
+        <% if ((poem.lineBeingEdited > 1) && (poem.lineBeingEdited < 16)) { %>
+          <div class='inprogresspoem'>in progress</div>
+          <%= poem['l' + (poem.lineBeingEdited -1) + 'w' + poem.wordsPerLine] %>
+        <% } %>
+
+        <% if (poem.lineBeingEdited == 16) { %>
+          <div class='completepoem'>complete</div>
+          <div>
+            <%= poem.l1w1 %> <%= poem.l1w2 %> <%= poem.l1w3 %> <%= poem.l1w4 %> <%= poem.l1w5 %>
+          </div>
+        <% } %>
+
       </div>
       <div class='col-xs-2 wrap'>
         <%= poem.author.username %>

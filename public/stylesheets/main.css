@@ -46,3 +46,17 @@
   margin: 5px;
   padding: 15px;
 }
+
+.newpoem {
+  background-color: yellow;
+}
+
+.inprogresspoem {
+  background-color: orange;
+  color: black;
+}
+
+.completepoem {
+  background-color: green;
+  color: white;
+}
