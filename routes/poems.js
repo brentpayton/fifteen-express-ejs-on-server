@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
 // ----------------------------------------------------------------------------
 // Show poems by title with pagination
 // ----------------------------------------------------------------------------
-router.get('/byTitle/:skip/:limit', function(req, res) {
+router.get('/byTitle/skip/:skip/limit/:limit', function(req, res) {
   Poem.find()
     .collation({locale: "en" })
     .skip(parseInt(req.params.skip))
