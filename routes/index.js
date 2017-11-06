@@ -1,4 +1,4 @@
-var express               = require('express');
+  var express               = require('express');
 var router                = express.Router();
 var Poem                  = require('../models/poem');
 
@@ -17,6 +17,7 @@ router.get('/', function(req, res) {
     if (err) {
       console.log(err);
     } else {
+      // res.render('poems/index', {poems: allPoems});
       res.render('poems/index', {poems: allPoems});
     }
   });

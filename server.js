@@ -17,9 +17,7 @@ var app                   = express();
 var bodyParser            = require('body-parser');
 var credentials           = require('./credentials.json');
 var passport              = require('passport'),
-    // TwitterStrategy       = require('passport-twitter').Strategy,
     FacebookStrategy      = require('passport-facebook').Strategy;
-//
 var expressSession        = require('express-session');
                             app.use(expressSession({
                               secret              : credentials.expressSession,

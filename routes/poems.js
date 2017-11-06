@@ -15,9 +15,13 @@ router.get('/', function(req, res) {
     }
   });
 });
+//
+// router.get('/', function(req, res) {
+//   res.redirect('https://dev.fifteenlines.com/poems/byTitle/skip/0/limit/5');
+// });
 
 // ----------------------------------------------------------------------------
-// Show poems by title with pagination
+// Show poems sorted by title with pagination
 // ----------------------------------------------------------------------------
 router.get('/byTitle/skip/:skip/limit/:limit', function(req, res) {
   Poem.find()
@@ -33,24 +37,11 @@ router.get('/byTitle/skip/:skip/limit/:limit', function(req, res) {
   });
 });
 
-// ----------------------------------------------------------------------------
-// Show all poems, sort by title
-// ----------------------------------------------------------------------------
-router.get('/byTitleOld', function(req, res) {
+router.get('/byTitleReverse/skip/:skip/limit/:limit', function(req, res) {
   Poem.find()
     .collation({locale: "en" })
-    .sort('title').exec(function(err, allPoems) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('poems/index', {poems: allPoems});
-    }
-  });
-});
-
-router.get('/byTitleReverse', function(req, res) {
-  Poem.find()
-    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
     .sort('-title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
@@ -60,9 +51,11 @@ router.get('/byTitleReverse', function(req, res) {
   });
 });
 
-router.get('/adminByTitle', middleware.isAdmin, function(req, res) {
+router.get('/adminByTitle/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
   Poem.find()
     .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
     .sort('title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
@@ -72,9 +65,11 @@ router.get('/adminByTitle', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/adminByTitleReverse', middleware.isAdmin, function(req, res) {
+router.get('/adminByTitleReverse/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
   Poem.find()
     .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))    
     .sort('-title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
