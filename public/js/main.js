@@ -12,27 +12,28 @@ $(document).ready(function(){
 // -----------------------------------------------------------------------------
 // Poem sort order toggles
 // -----------------------------------------------------------------------------
+var limit = 20;  // Common variable for how many results will be shown on one page
 function toggleTitle() {
   if (window.location.href.indexOf("byTitleReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byTitle/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byTitle/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byTitleReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byTitleReverse/skip/0/limit/' + limit;
   }
 }
 
 function toggleAuthor() {
   if (window.location.href.indexOf("byAuthorReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byAuthor/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byAuthor/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byAuthorReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byAuthorReverse/skip/0/limit/' + limit;
   }
 }
 
 function toggleDate() {
   if (window.location.href.indexOf("byDateReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byDate/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byDate/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/byDateReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/byDateReverse/skip/0/limit/' + limit;
   }
 }
 
@@ -41,33 +42,33 @@ function toggleDate() {
 // -----------------------------------------------------------------------------
 function adminToggleTitle() {
   if (window.location.href.indexOf("adminByTitleReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitle/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitle/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitleReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitleReverse/skip/0/limit/' + limit;
   }
 }
 
 function adminToggleAuthor() {
   if (window.location.href.indexOf("adminByAuthorReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByAuthor/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByAuthor/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByAuthorReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByAuthorReverse/skip/0/limit/' + limit;
   }
 }
 
 function adminToggleDate() {
   if (window.location.href.indexOf("adminByDateReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByDate/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByDate/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByDateReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByDateReverse/skip/0/limit/' + limit;
   }
 }
 
 function adminToggleHidden() {
   if (window.location.href.indexOf("adminByHiddenReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHidden/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHidden/skip/0/limit/' + limit;
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHiddenReverse/skip/0/limit/5';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByHiddenReverse/skip/0/limit/' + limit;
   }
 }
 
@@ -97,14 +98,6 @@ function adminToggleAdmin() {
     window.location.href = 'https://dev.fifteenlines.com/users/adminByAdminReverse';
   }
 }
-
-// function adminToggleHidden() {
-//   if (window.location.href.indexOf("adminByHiddenReverse") > -1) {
-//     window.location.href = 'https://dev.fifteenlines.com/poems/adminByHidden';
-//   } else {
-//     window.location.href = 'https://dev.fifteenlines.com/poems/adminByHiddenReverse';
-//   }
-// }
 
 // -----------------------------------------------------------------------------
 // Pagination
@@ -151,14 +144,14 @@ function turnPage(direction) {
   }
 
   if (isNaN(skip)) {
-    skip = 5;
-    limit = 5;
+    skip = limit;
+    limit = limit;
     newUrl = 'https://dev.fifteenlines.com/poems/byTitle/';
   }
 
   if (isNaN(limit)) {
-    skip = 5;
-    limit = 5;
+    skip = limit;
+    limit = limit;
     newUrl = 'https://dev.fifteenlines.com/poems/byTitle';
   }
 

@@ -77,7 +77,12 @@
         <%= poem.author.username %>
       </div>
       <div class='col-xs-2 wrap'>
-        <%= poem.createdAt %>
+        <script>
+          var date = new Date('<%= poem.createdAt %>');  // dateStr you get from mongodb
+          date = date.toString();
+          date = date.substring(0,24);
+          document.write(date);
+        </script>
       </div>
     </div>
   <% }) %>
