@@ -79,10 +79,12 @@ router.get('/adminByTitleReverse/skip/:skip/limit/:limit', middleware.isAdmin, f
 // ----------------------------------------------------------------------------
 // Show all poems, sort by author
 // ----------------------------------------------------------------------------
-router.get('/byAuthor', function(req, res) {
+router.get('/byAuthor/skip/:skip/limit/:limit', function(req, res) {
   Poem.find()
-  .collation({locale: "en" })
-  .sort('author').exec(function(err, allPoems){
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('author').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {
@@ -91,10 +93,12 @@ router.get('/byAuthor', function(req, res) {
   });
 });
 
-router.get('/byAuthorReverse', function(req, res) {
+router.get('/byAuthorReverse/skip/:skip/limit/:limit', function(req, res) {
   Poem.find()
-  .collation({locale: "en" })
-  .sort('-author').exec(function(err, allPoems){
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-author').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {
@@ -103,9 +107,11 @@ router.get('/byAuthorReverse', function(req, res) {
   });
 });
 
-router.get('/adminByAuthor', middleware.isAdmin, function(req, res) {
+router.get('/adminByAuthor/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
   Poem.find()
   .collation({locale: "en" })
+  .skip(parseInt(req.params.skip))
+  .limit(parseInt(req.params.limit))
   .sort('author').exec(function(err, allPoems){
     if (err) {
       console.log(err);
@@ -115,9 +121,11 @@ router.get('/adminByAuthor', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/adminByAuthorReverse', middleware.isAdmin, function(req, res) {
+router.get('/adminByAuthorReverse/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
   Poem.find()
   .collation({locale: "en" })
+  .skip(parseInt(req.params.skip))
+  .limit(parseInt(req.params.limit))
   .sort('-author').exec(function(err, allPoems){
     if (err) {
       console.log(err);
@@ -130,8 +138,12 @@ router.get('/adminByAuthorReverse', middleware.isAdmin, function(req, res) {
 // ----------------------------------------------------------------------------
 // Show all poems, sort by date
 // ----------------------------------------------------------------------------
-router.get('/byDate', function(req, res) {
-  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+router.get('/byDate/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('createdAt').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
@@ -140,8 +152,12 @@ router.get('/byDate', function(req, res) {
   });
 });
 
-router.get('/byDateReverse', function(req, res) {
-  Poem.find({}).sort('-createdAt').exec(function(err, allPoems){
+router.get('/byDateReverse/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-createdAt').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
@@ -150,8 +166,12 @@ router.get('/byDateReverse', function(req, res) {
   });
 });
 
-router.get('/adminByDate', middleware.isAdmin, function(req, res) {
-  Poem.find({}).sort('createdAt').exec(function(err, allPoems){
+router.get('/adminByDate/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('createdAt').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
@@ -160,8 +180,12 @@ router.get('/adminByDate', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/adminByDateReverse', middleware.isAdmin, function(req, res) {
-  Poem.find({}).sort('-createdAt').exec(function(err, allPoems){
+router.get('/adminByDateReverse/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-createdAt').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
@@ -173,8 +197,12 @@ router.get('/adminByDateReverse', middleware.isAdmin, function(req, res) {
 // ----------------------------------------------------------------------------
 // Show all poems, sort by hidden.  Admin interface only.
 // ----------------------------------------------------------------------------
-router.get('/adminByHidden', middleware.isAdmin, function(req, res) {
-  Poem.find({}).sort('hidden').exec(function(err, allPoems){
+router.get('/adminByHidden/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('hidden').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
@@ -183,8 +211,12 @@ router.get('/adminByHidden', middleware.isAdmin, function(req, res) {
   });
 });
 
-router.get('/adminByHiddenReverse', middleware.isAdmin, function(req, res) {
-  Poem.find({}).sort('-hidden').exec(function(err, allPoems){
+router.get('/adminByHiddenReverse/skip/:skip/limit/:limit', middleware.isAdmin, function(req, res) {
+  Poem.find()
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-hidden').exec(function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
