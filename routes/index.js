@@ -12,15 +12,37 @@ var Poem                  = require('../models/poem');
 // ----------------------------------------------------------------------------
 // Show all poems
 // ----------------------------------------------------------------------------
+// router.get('/', function(req, res) {
+//   Poem.find({}, function(err, allPoems){
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.render('poems/index', {poems: allPoems});
+//     }
+//   });
+// });
+
 router.get('/', function(req, res) {
-  Poem.find({}, function(err, allPoems){
+  Poem.find()
+    .skip(0)
+    .limit(5)
+    .exec(function(err, allPoems) {
     if (err) {
       console.log(err);
     } else {
-      // res.render('poems/index', {poems: allPoems});
       res.render('poems/index', {poems: allPoems});
     }
   });
 });
 
+
+router.get('/howToPlay', function(req, res) {
+  Poem.find({}, function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('howtoplay');
+    }
+  });
+});
 module.exports = router;

@@ -41,9 +41,12 @@ function toggleDate() {
 // -----------------------------------------------------------------------------
 function adminToggleTitle() {
   if (window.location.href.indexOf("adminByTitleReverse") > -1) {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitle';
+    // window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitle';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitle/skip/0/limit/5';
+
   } else {
-    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitleReverse';
+    // window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitleReverse';
+    window.location.href = 'https://dev.fifteenlines.com/poems/adminByTitleReverse/skip/0/limit/5';
   }
 }
 

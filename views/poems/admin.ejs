@@ -9,15 +9,20 @@
   </div>
 
   <%# Pagination %>
-  <div class='row'>
-    <div class='col-xs-12 center-block'>
-      <strong>
-      <a href='#' id='pageBackward' onClick="turnPage('back')"> <----- </a>
-      |
-      <a href='#' id='pageForward' onClick="turnPage('forward')"> -----> </a>
-      </strong>
-    </div>
-  </div>
+  <nav aria-label="Page navigation" class='text-center'>
+    <ul class="pagination">
+      <li>
+        <a href='#' id='pageForward' onClick="turnPage('back')" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li>
+        <a href='#' id='pageForward' onClick="turnPage('forward')" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
   <div class='row'>
     <div class='col-xs-1'>

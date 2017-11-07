@@ -5,6 +5,7 @@ var middleware            = require('../middleware');  // Contents of index.js a
 
 // ----------------------------------------------------------------------------
 // Show all poems
+// Not used but kept just in case.
 // ----------------------------------------------------------------------------
 router.get('/', function(req, res) {
   Poem.find({}, function(err, allPoems){
@@ -15,10 +16,6 @@ router.get('/', function(req, res) {
     }
   });
 });
-//
-// router.get('/', function(req, res) {
-//   res.redirect('https://dev.fifteenlines.com/poems/byTitle/skip/0/limit/5');
-// });
 
 // ----------------------------------------------------------------------------
 // Show poems sorted by title with pagination
@@ -69,7 +66,7 @@ router.get('/adminByTitleReverse/skip/:skip/limit/:limit', middleware.isAdmin, f
   Poem.find()
     .collation({locale: "en" })
     .skip(parseInt(req.params.skip))
-    .limit(parseInt(req.params.limit))    
+    .limit(parseInt(req.params.limit))
     .sort('-title').exec(function(err, allPoems) {
     if (err) {
       console.log(err);
