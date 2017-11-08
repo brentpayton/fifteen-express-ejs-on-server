@@ -73,6 +73,41 @@ function adminToggleHidden() {
 }
 
 // -----------------------------------------------------------------------------
+// 'my poems' toggles
+// -----------------------------------------------------------------------------
+function getId() {
+  // Index of the 'id' keyword.
+  var i = getPosition(window.location.href, 'id', 1);
+  var userId = window.location.href.substring(i + 2); // Because 'id' is 2 chars long
+  // Get the position of the first /
+  i = getPosition(userId, '/', 1);
+  // Cut the string from the first / to the end of the user id substring
+  userId = userId.substring(1, 25);
+  console.log('userId:  ' + userId);
+  return(userId);
+}
+
+function myPoemsToggleTitle() {
+  userId = getId();
+  if (window.location.href.indexOf("myPoemsByTitleReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/poems/myPoemsByTitle/id/' + userId + '/skip/0/limit/' + limit;
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/poems/myPoemsByTitleReverse/id/' + userId + '/skip/0/limit/' + limit;
+  }
+}
+
+function myPoemsToggleDate() {
+  userId = getId();
+  // userId = '59e1368aa50dec271fb4ea53';
+  console.log(userId);
+  if (window.location.href.indexOf("myPoemsByDateReverse") > -1) {
+    window.location.href = 'https://dev.fifteenlines.com/poems/myPoemsByDate/id/' + userId + '/skip/0/limit/' + limit;
+  } else {
+    window.location.href = 'https://dev.fifteenlines.com/poems/myPoemsByDateReverse/id/' + userId + '/skip/0/limit/' + limit;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // User admin sort order toggles
 // -----------------------------------------------------------------------------
 function adminToggleUsername() {

@@ -31,27 +31,23 @@
   <%# Column headers %>
   <div class='row'>
     <div class='col-xs-3'>
-      <strong> <a href='#' id='toggleTitle' onClick='toggleTitle()'>title</a> </strong>
+      <strong> <a href='#' id='toggleTitle' onClick='myPoemsToggleTitle()'>title</a> </strong>
     </div>
-    <div class='col-xs-5'>
+    <div class='col-xs-7'>
       <strong>preview</strong>
     </div>
     <div class='col-xs-2'>
-      <strong> <a href='#' id='toggleAuthor' onClick='toggleAuthor()'>started by</a> </strong>
-    </div>
-    <div class='col-xs-2'>
-      <strong> <a href='#' id='toggleDate' onClick='toggleDate()'>date</a> </strong>
+      <strong> <a href='#' id='myPoemsToggleDate' onClick='myPoemsToggleDate()'>date</a> </strong>
     </div>
   </div>
-  <hr />
 
   <%# Poems %>
   <% poems.forEach(function(poem){ %>
     <div class="row">
       <div class='col-xs-3 wrap'>
-        <h5> <a href='/poems/<% poem._id %>'> <%= poem.title %> </a> </h5>
+        <h5> <a href='/poems/<%= poem._id %>'> <%= poem.title %> </a> </h5>
       </div>
-      <div class='col-xs-5 wrap'>
+      <div class='col-xs-7 wrap'>
         <% if (poem.lineBeingEdited == 1) { %>
           <div class='newpoem'>new</div>
         <% } %>
@@ -68,9 +64,6 @@
           </div>
         <% } %>
 
-      </div>
-      <div class='col-xs-2 wrap'>
-        <%= poem.author.username %>
       </div>
 
       <div class='col-xs-2 wrap'>

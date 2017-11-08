@@ -241,20 +241,71 @@ router.get('/admin', middleware.isAdmin, function(req, res) {
 // ----------------------------------------------------------------------------
 // "My Poems"
 // ----------------------------------------------------------------------------
-// currentUser.username
-
-// 59e1368aa50dec271fb4ea53
-
-router.get('/mypoems/:id', function(req, res) {
+router.get('/mypoems/id/:id', function(req, res) {
   Poem.find({ 'author.id' : req.params.id }, function(err, allPoems){
     if (err) {
       console.log(err);
     } else {
-      res.render('poems/mypoems', {poems: allPoems});
+      res.render('poems/myPoems', {poems: allPoems});
     }
   });
 });
 
+router.get('/myPoemsByDate/id/:id/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find({ 'author.id' : req.params.id })
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/myPoems', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/myPoemsByDateReverse/id/:id/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find({ 'author.id' : req.params.id })
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-createdAt').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/myPoems', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/myPoemsByTitle/id/:id/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find({ 'author.id' : req.params.id })
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('title').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/myPoems', {poems: allPoems});
+    }
+  });
+});
+
+router.get('/myPoemsByTitleReverse/id/:id/skip/:skip/limit/:limit', function(req, res) {
+  Poem.find({ 'author.id' : req.params.id })
+    .collation({locale: "en" })
+    .skip(parseInt(req.params.skip))
+    .limit(parseInt(req.params.limit))
+    .sort('-title').exec(function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/myPoems', {poems: allPoems});
+    }
+  });
+});
 // ----------------------------------------------------------------------------
 // Create
 // ----------------------------------------------------------------------------
@@ -519,7 +570,8 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
       console.log(err);
     } else {
       req.flash('success', 'Poem added');
-      res.redirect('/poems');
+      // res.redirect('/poems');
+      res.redirect('/poems/myPoemsByDateReverse/id/' + req.user._id + '/skip/0/limit/20');
     }
   });
 });
@@ -528,7 +580,7 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
 // Show details about one poem
 //
 // MUST NOT BE MOVED any higher in this file otherwise a request to /new, for
-// example, will cause 'new' to be interpreted as a campground id and this will
+// example, will cause 'new' to be interpreted as a poem id and this will
 // generate fatal errors.
 // ----------------------------------------------------------------------------
 router.get('/:id', function(req, res) {
