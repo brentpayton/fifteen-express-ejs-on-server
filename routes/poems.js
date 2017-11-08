@@ -239,6 +239,23 @@ router.get('/admin', middleware.isAdmin, function(req, res) {
 });
 
 // ----------------------------------------------------------------------------
+// "My Poems"
+// ----------------------------------------------------------------------------
+// currentUser.username
+
+// 59e1368aa50dec271fb4ea53
+
+router.get('/mypoems/:id', function(req, res) {
+  Poem.find({ 'author.id' : req.params.id }, function(err, allPoems){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('poems/mypoems', {poems: allPoems});
+    }
+  });
+});
+
+// ----------------------------------------------------------------------------
 // Create
 // ----------------------------------------------------------------------------
 router.get('/new', middleware.isLoggedIn, function(req, res) {

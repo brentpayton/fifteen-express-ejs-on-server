@@ -92,6 +92,8 @@
             <%# Local user -%>
             <% if (currentUser && currentUser.username) { -%>
               <li class='pull-right'><a href='#'>Signed in as <%= currentUser.username -%></a></li>
+              <li class='pull-right'><a href='/poems/mypoems/<%= currentUser._id -%>'>My Poems</a></li>
+
               <% if (currentUser.admin) { -%>
                 <li class='pull-right'><a href='/users' id='userManagementLink'>User Management</a></li>
               <% } -%>
