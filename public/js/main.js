@@ -178,15 +178,15 @@ function turnPage(direction) {
     skip += limit;
   }
 
-  if (isNaN(skip)) {
-    skip = limit;
-    limit = limit;
+  if ((isNaN(skip)) || (skip < 0)) {
+    skip = 0;
+    limit = 20;
     newUrl = 'https://dev.fifteenlines.com/poems/byTitle/';
   }
 
-  if (isNaN(limit)) {
-    skip = limit;
-    limit = limit;
+  if ((isNaN(limit)) || (limit < 1)) {
+    skip = 0;
+    limit = 20;
     newUrl = 'https://dev.fifteenlines.com/poems/byTitle';
   }
 
