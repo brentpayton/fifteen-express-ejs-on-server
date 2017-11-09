@@ -11,7 +11,7 @@
 
   <%# Control visibility of add poem button based on whether a user is logged in or not. %>
   <% if (currentUser){ %>
-    <div class='row'>
+    <div class='row addPoemButton'>
       <div>
         <a class="btn btn-success center-block" href='/poems/new' id='addPoem'>Add a poem</a>
       </div>
@@ -24,16 +24,17 @@
     <ul class="pagination">
       <li>
         <a href='#' id='pageForward' onClick="turnPage('back')" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
+          <span aria-hidden="true">&laquo; previous&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </a>
       </li>
       <li>
         <a href='#' id='pageForward' onClick="turnPage('forward')" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
+          <span aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;next &raquo;</span>
         </a>
       </li>
     </ul>
   </nav>
+
   <%# Column headers %>
   <div class='row'>
     <div class='col-xs-3'>

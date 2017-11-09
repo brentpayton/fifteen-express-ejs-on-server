@@ -19,7 +19,6 @@
   color: black;
 }
 
-
 @media (max-width: 768px) {
 .btn-responsive {
   border-radius:3px;
@@ -59,4 +58,19 @@
 .completepoem {
   background-color: green;
   color: white;
+}
+
+.pagination {
+  margin: 0;
+  margin-top: 5px;
+}
+
+.jumbotron {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+}
+
+.addPoemButton {
+  margin-top: 5px;
 }
