@@ -2,20 +2,27 @@
 
 <script>
   $(document).ready(function(){
+    <%# Retrieve lineBeingEdited from the database %>
     i = <%= poem.lineBeingEdited %>;
 
+    <%# Perform these steps only if the poem is incomplete.  Otherwise leave all fields visible. %>
     if (i < 16)
     {
       if (i > 1) {
+        <%# If the line being edited is > 1, hide all lines from 1 to lineBeingEdited %>
         for (i = 1; i < <%= poem.lineBeingEdited %>; i++ ) {
-          document.getElementById('line' + i).style.display = 'none';
+          // document.getElementById('line' + i).style.display = 'none';
+          $('#line' + i).remove();
         }
       }
+      <%# Hide all lines from (lineBeingEdited + 1) to 16 %>
       var j = <%= poem.lineBeingEdited %> + 1;
       for (j; j < 16; j++) {
-        document.getElementById('line' + j).style.display = 'none';
+        // document.getElementById('line' + j).style.display = 'none';
+        $('#line' + j).remove();
       }
     }
+    <%# Set and hide lineBeingEdited %>
     document.getElementById('lineBeingEdited').value = <%= poem.lineBeingEdited + 1 %>;
     document.getElementById('lineBeingEdited').style.display = 'none';
 
@@ -35,7 +42,7 @@
 
         <h3>Title</h3>
         <div class='form-group' style='width: 100%;'>
-          <input class='form-control' style='width: 100%;' type='text' maxlength='120' value='<%= poem.title %>' name='poem[title]' style="color: black;">
+          <input class='form-control' style='width: 100%;' type='text' maxlength='120' value='<%= poem.title %>' name='poem[title]' style="color: black;" required>
         </div>
 
         <% if (poem.lineBeingEdited > 1) { %>
@@ -47,13 +54,28 @@
 
         <% var wordsPerLine = poem.wordsPerLine %>
 
+        <%# Hidden input used to update the "lineBeingEdited" attribute each time the form is submitted.%>
         <div class='form-group' id='nextLine'>
-          <input class='form-control' type='text' value='<%= poem.lineBeingEdited %>' name='poem[lineBeingEdited]' id='lineBeingEdited'>
+          <input
+            class='form-control'
+            type='text'
+            value='<%= poem.lineBeingEdited %>'
+            name='poem[lineBeingEdited]'
+            id='lineBeingEdited'>
         </div>
 
         <div class='form-group' id='line1'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 1 word <%- i+1 %>' value="<%= poem['l1w' + (i + 1)] %>" name='poem[l1w<%- i+1 %>]' id='l1w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 1 word <%- i+1 %>'
+              value="<%= poem['l1w' + (i + 1)] %>"
+              name='poem[l1w<%- i+1 %>]'
+              id='l1w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -61,7 +83,16 @@
 
         <div class='form-group' id='line2'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 2 word <%- i+1 %>' value="<%= poem['l2w' + (i + 1)] %>" name='poem[l2w<%- i+1 %>]'  id='l2w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 2 word <%- i+1 %>'
+              value="<%= poem['l2w' + (i + 1)] %>"
+              name='poem[l2w<%- i+1 %>]'
+              id='l2w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -69,7 +100,16 @@
 
         <div class='form-group' id='line3'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 3 word <%- i+1 %>' value="<%= poem['l3w' + (i + 1)] %>" name='poem[l3w<%- i+1 %>]' id='l3w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 3 word <%- i+1 %>'
+              value="<%= poem['l3w' + (i + 1)] %>"
+              name='poem[l3w<%- i+1 %>]'
+              id='l3w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -77,7 +117,16 @@
 
         <div class='form-group' id='line4'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 4 word <%- i+1 %>' value="<%= poem['l4w' + (i + 1)] %>" name='poem[l4w<%- i+1 %>]' id='l4w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 4 word <%- i+1 %>'
+              value="<%= poem['l4w' + (i + 1)] %>"
+              name='poem[l4w<%- i+1 %>]'
+              id='l4w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -85,7 +134,16 @@
 
         <div class='form-group' id='line5'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 5 word <%- i+1 %>' value="<%= poem['l5w' + (i + 1)] %>" name='poem[l5w<%- i+1 %>]' id='l5w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 5 word <%- i+1 %>'
+              value="<%= poem['l5w' + (i + 1)] %>"
+              name='poem[l5w<%- i+1 %>]'
+              id='l5w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -93,7 +151,16 @@
 
         <div class='form-group' id='line6'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 6 word <%- i+1 %>' value="<%= poem['l6w' + (i + 1)] %>" name='poem[l6w<%- i+1 %>]' id='l6w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 6 word <%- i+1 %>'
+              value="<%= poem['l6w' + (i + 1)] %>"
+              name='poem[l6w<%- i+1 %>]'
+              id='l6w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -101,7 +168,16 @@
 
         <div class='form-group' id='line7'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 7 word <%- i+1 %>' value="<%= poem['l7w' + (i + 1)] %>" name='poem[l7w<%- i+1 %>]' id='l7w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 7 word <%- i+1 %>'
+              value="<%= poem['l7w' + (i + 1)] %>"
+              name='poem[l7w<%- i+1 %>]'
+              id='l7w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -109,7 +185,16 @@
 
         <div class='form-group' id='line8'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 8 word <%- i+1 %>' value="<%= poem['l8w' + (i + 1)] %>" name='poem[l8w<%- i+1 %>]' id='l8w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 8 word <%- i+1 %>'
+              value="<%= poem['l8w' + (i + 1)] %>"
+              name='poem[l8w<%- i+1 %>]'
+              id='l8w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -117,7 +202,16 @@
 
         <div class='form-group' id='line9'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 9 word <%- i+1 %>' value="<%= poem['l9w' + (i + 1)] %>" name='poem[l9w<%- i+1 %>]' id='l9w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 9 word <%- i+1 %>'
+              value="<%= poem['l9w' + (i + 1)] %>"
+              name='poem[l9w<%- i+1 %>]'
+              id='l9w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -125,7 +219,16 @@
 
         <div class='form-group' id='line10'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 10 word <%- i+1 %>' value="<%= poem['l10w' + (i + 1)] %>" name='poem[l10w<%- i+1 %>]' id='l10w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 10 word <%- i+1 %>'
+              value="<%= poem['l10w' + (i + 1)] %>"
+              name='poem[l10w<%- i+1 %>]'
+              id='l10w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -133,7 +236,16 @@
 
         <div class='form-group' id='line11'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 11 word <%- i+1 %>' value="<%= poem['l11w' + (i + 1)] %>" name='poem[l11w<%- i+1 %>]' id='l11w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 11 word <%- i+1 %>'
+              value="<%= poem['l11w' + (i + 1)] %>"
+              name='poem[l11w<%- i+1 %>]'
+              id='l11w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -141,7 +253,16 @@
 
         <div class='form-group' id='line12'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 12 word <%- i+1 %>' value="<%= poem['l12w' + (i + 1)] %>" name='poem[l12w<%- i+1 %>]' id='l12w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 12 word <%- i+1 %>'
+              value="<%= poem['l12w' + (i + 1)] %>"
+              name='poem[l12w<%- i+1 %>]'
+              id='l12w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -149,7 +270,16 @@
 
         <div class='form-group' id='line13'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 13 word <%- i+1 %>' value="<%= poem['l13w' + (i + 1)] %>" name='poem[l13w<%- i+1 %>]' id='l13w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 13 word <%- i+1 %>'
+              value="<%= poem['l13w' + (i + 1)] %>"
+              name='poem[l13w<%- i+1 %>]'
+              id='l13w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -157,7 +287,16 @@
 
         <div class='form-group' id='line14'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 14 word <%- i+1 %>' value="<%= poem['l14w' + (i + 1)] %>" name='poem[l14w<%- i+1 %>]' id='l14w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 14 word <%- i+1 %>'
+              value="<%= poem['l14w' + (i + 1)] %>"
+              name='poem[l14w<%- i+1 %>]'
+              id='l14w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />
@@ -165,7 +304,16 @@
 
         <div class='form-group' id='line15'>
           <% for (var i = 0; i < wordsPerLine; i++) { %>
-            <input class='form-control' type='text' maxlength='20' placeholder='line 15 word <%- i+1 %>' value="<%= poem['l15w' + (i + 1)] %>" name='poem[l15w<%- i+1 %>]' id='l15w<%- i+1 %>'>
+            <input
+              class='form-control'
+              type='text' maxlength='20'
+              placeholder='line 15 word <%- i+1 %>'
+              value="<%= poem['l15w' + (i + 1)] %>"
+              name='poem[l15w<%- i+1 %>]'
+              id='l15w<%- i+1 %>'
+              required
+              pattern="^\S+$"
+              onInvalid="setCustomValidity('Each field must be filled out.  Only one word may be entered.  No spaces may be used.')">
           <% } %>
           <br />
           <br />

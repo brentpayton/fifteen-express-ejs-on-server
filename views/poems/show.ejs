@@ -2,22 +2,29 @@
 
 <script>
   $(document).ready(function(){
-    if (<%= poem.lineBeingEdited %> < 16) {
-      for (i = 1; i < 15; i++ ) {
-        <%# Hide all lines %>
-        document.getElementById('line' + i).style.display = 'none';
+    <%# Retrieve lineBeingEdited from the database %>
+    i = <%= poem.lineBeingEdited %>;
+
+    <%# Perform these steps only if the poem is incomplete.  Otherwise leave all fields visible. %>
+    if (i < 16)
+    {
+      if (i > 1) {
+        <%# If the line being edited is > 1, hide all lines from 1 to lineBeingEdited %>
+        for (i = 1; i < <%= poem.lineBeingEdited %>; i++ ) {
+          // document.getElementById('line' + i).style.display = 'none';
+          $('#line' + i).remove();
+        }
+      }
+      <%# Hide all lines from (lineBeingEdited + 1) to 16 %>
+      var j = <%= poem.lineBeingEdited %> + 1;
+      for (j; j < 16; j++) {
+        // document.getElementById('line' + j).style.display = 'none';
+        $('#line' + j).remove();
       }
     }
 
-    if (<%= poem.lineBeingEdited %> > 1) {
-      Tail:  '<%= poem['l' + (poem.lineBeingEdited -1) + 'w' + poem.wordsPerLine] %>'
-    }
-
-    for (j = 1; j < 16; j++) {
-      document.getElementById('line' + j).style.display = 'block';
-    }
-
   });
+
 </script>
 
 <div class='container'>
