@@ -48,7 +48,7 @@
   <% poems.forEach(function(poem){ %>
     <div class="row">
       <div class="col-xs-1" style="vertical-align: middle">
-        <a class='btn btn-primary btn-responsive' type="submit" href="/poems/<%= poem._id %>">
+        <a class='btn btn-primary btn-responsive' type="submit" href="/poems/<%= poem._id %>/adminEdit">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a>
         <form class='delete-form delete' action='/poems/<%= poem._id %>?_method=DELETE' method="POST">
           <button class='btn btn-danger btn-responsive' type="submit">
@@ -67,7 +67,7 @@
       <div class='col-xs-2 wrap'>
         <%# poem.createdAt %>
         <script>
-          var date = new Date('<%= poem.createdAt %>');  // dateStr you get from mongodb
+          var date = new Date('<%= poem.createdAt %>');  <%# dateStr from mongodb %>
           date = date.toString();
           date = date.substring(0,24);
           document.write(date);

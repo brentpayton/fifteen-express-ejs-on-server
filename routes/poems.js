@@ -608,6 +608,16 @@ router.get('/:id/edit', function(req, res) {
   });
 });
 
+router.get('/:id/adminEdit', middleware.isAdmin, function(req, res) {
+  Poem.findById(req.params.id, function(err, foundPoem) {
+    if (err) {
+      console.log(err);
+      req.flash('error', err);
+    }
+    res.render('poems/adminEdit', {poem: foundPoem});
+  });
+});
+
 router.put('/:id', function (req, res){
   Poem.findByIdAndUpdate(
     req.params.id,
