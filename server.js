@@ -26,7 +26,18 @@ var expressSession        = require('express-session');
                             }));
 var moment                = require('moment');
 var promise               = require('bluebird');
-var port                  = 3010;
+// var port               = 3010;
+
+switch(app.get('env')) {
+    case 'development':
+        var port = 3010;
+        break;
+    case 'production':
+        var port = 3011;
+        break;
+    default:
+        throw new error('Unknown execution environment: ', app.get('env'));
+}
 
 // ----------------------------------------------------------------------------
 // Mongoose
