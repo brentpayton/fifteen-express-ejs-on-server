@@ -40,8 +40,11 @@
     <div class='col-xs-2'>
       <strong> <a href='#' id='adminToggleDate' onClick='adminToggleDate()'>date</a> </strong>
     </div>
-    <div class='col-xs-2'>
+    <div class='col-xs-1'>
       <strong> <a href='#' id='adminToggleHidden' onClick='adminToggleHidden()'>hidden</a> </strong>
+    </div>
+    <div class='col-xs-1'>
+      <strong> status </strong>
     </div>
   </div>
 
@@ -73,8 +76,21 @@
           document.write(date);
         </script>
       </div>
-      <div class='col-xs-2 wrap'>
+      <div class='col-xs-1 wrap'>
         <%= poem.hidden %>
+      </div>
+      <div class='col-xs-1 wrap'>
+        <% if (poem.lineBeingEdited == 1) { %>
+          <div class='newpoem'>new</div>
+        <% } %>
+
+        <% if ((poem.lineBeingEdited > 1) && (poem.lineBeingEdited < 16)) { %>
+          <div class='inprogresspoem'>in progress</div>
+        <% } %>
+
+        <% if (poem.lineBeingEdited == 16) { %>
+          <div class='completepoem'>complete</div>
+        <% } %>
       </div>
     </div>
   <% }) %>
