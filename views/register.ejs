@@ -26,21 +26,8 @@
       <h1>Sign Up</h1>
     </div>
   </div>
-
-  <div class="row">
-    <div class='col-md-10 offset-md-2 centered'>
-      <a href="/login/facebook"><img src="../images/facebook.png" width="300" alt=""></a>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class='col-md-10 offset-md-2 centered'>
-      <br /> or...
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8 offset-md-4 centered">
+  <div class='row'>
+    <div class='col-sm-6' style='border-right: thin solid black;'>
       <form action='/register' method='POST'>
         <div class="form-group">
           <input type='text' class="form-control" name='username' id='username' placeholder='username' required>
@@ -56,8 +43,9 @@
         <button class="btn btn-primary" type="submit" id="signUp" name="signUp">Sign Up</button>
       </form>
     </div>
-  </div>
-
+    <div class='col-sm-6'>
+      <a href="/login/facebook"><img src="../images/facebook.png" width="300" alt=""></a>
+    </div>
 </div>
 
 <script>

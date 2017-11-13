@@ -13,13 +13,28 @@
       <strong>&nbsp;</strong>
     </div>
     <div class='col-xs-3'>
-      <strong> <a href='#' id='adminToggleUsername' onClick='adminToggleUsername()'>username</a> </strong>
+      <strong>
+        <a
+          href='#'
+          id='adminToggleUsername'
+          onClick='adminToggleUsername()'>
+          username
+        </a>
+      </strong>
     </div>
     <div class='col-xs-4'>
-      <strong> <a href='#' id='adminToggleEmail' onClick='adminToggleEmail()'>email</a> </strong>
+      <strong>
+        <a
+          href='#'
+          id='adminToggleEmail'
+          onClick='adminToggleEmail()'>
+          email
+        </a>
+      </strong>
     </div>
     <div class='col-xs-2'>
-      <strong> <a href='#' id='adminToggleAdmin' onClick='adminToggleAdmin()'>admin</a> </strong>
+      <strong>
+        <a href='#' id='adminToggleAdmin' onClick='adminToggleAdmin()'>admin</a> </strong>
     </div>
     <div class='col-xs-2'>
       <strong>id</strong>
@@ -29,11 +44,29 @@
 <% users.forEach(function(user){ %>
   <div class="row">
   <div class="col-xs-1" style="vertical-align: middle">
-    <a class='btn btn-primary btn-responsive' type="submit" href="/users/<%= user._id %>/edit">
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edit</a>
-    <form class='delete-form delete' action='/users/<%= user._id %>?_method=DELETE' method="POST">
-      <button class='btn btn-danger btn-responsive' type="submit">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Del</button>
+    <a
+      class='btn btn-primary btn-responsive'
+      type="submit"
+      href="/users/<%= user._id %>/edit">
+      <span
+        class="glyphicon glyphicon-edit"
+        aria-hidden="true">
+      </span>
+      Edit
+    </a>
+    <form
+      class='delete-form delete'
+      action='/users/<%= user._id %>?_method=DELETE'
+      method="POST">
+      <button
+        class='btn btn-danger btn-responsive'
+        type="submit">
+        <span
+          class="glyphicon glyphicon-remove"
+          aria-hidden="true">
+          </span>
+        Del
+      </button>
     </form>
   </div>
     <div class='col-xs-3 wrap'>
@@ -53,10 +86,4 @@
 
 </div>
 
-<div class='container'>
-  <div class='row'>
-    <div class='col-xs-12'>
-      <% include ../partials/footer %>
-    </div>
-  </div>
-</div>
+<% include ../partials/footer %>

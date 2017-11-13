@@ -28,28 +28,40 @@
   </div>
 
   <div class='row'>
-    <div class='col-md-10 offset-md-2 centered'>
-      <a href="/login/facebook"><img src="../images/facebook.png" width="300" alt=""></a>
-    </div>
-
-    <div class='col-md-10 offset-md-2 centered'>
-      <br /> or...
-    </div>
-
-    <div class='col-md-10 offset-md-2 centered'>
+    <div class='col-sm-6' style="border-right: thin solid black;">
       <form action='/login' method='POST'>
         <div class='form-group'>
-          <input class='form-control' type='text' name='username' id='username' placeholder='username' required>
+          <input
+            class='form-control'
+            type='text'
+            name='username'
+            id='username'
+            placeholder='username'
+            required>
         </div>
         <div class='form-group'>
-          <input class='form-control' type='password' name='password' id='password' placeholder='password' required>
+          <input
+            class='form-control'
+            type='password'
+            name='password'
+            id='password'
+            placeholder='password'
+            required>
         </div>
-          <input class='btn btn-primary' type='submit' id='submit' value='Log In!'>
+          <input
+            class='btn btn-primary'
+            type='submit'
+            id='submit'
+            value='Log In!'>
       </form>
     </div>
-
+    <div class='col-sm-6'>
+      <a
+        href="/login/facebook">
+        <img src="../images/facebook.png" width="300" alt="Facebook button">
+      </a>
+    </div>
   </div>
-
 </div>
 
 <% include partials/footer %>

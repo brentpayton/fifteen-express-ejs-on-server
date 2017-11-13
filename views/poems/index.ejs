@@ -3,17 +3,30 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Welcome to Fifteenlines</h1>
-    <p><a class="btn btn-primary btn-lg" href="/howToPlay" role="button">Click here to learn how to play</a></p>
+    <p>
+      <a
+        class="btn btn-primary btn-lg"
+        href="/howToPlay"
+        role="button">
+        Click here to learn how to play
+      </a>
+    </p>
   </div>
 </div>
 
 <div class='container stripetable'>
 
-  <%# Control visibility of add poem button based on whether a user is logged in or not. %>
+  <%# Control visibility of add poem button based on whether a user is
+      logged in or not. %>
   <% if (currentUser){ %>
     <div class='row addPoemButton'>
       <div>
-        <a class="btn btn-success center-block" href='/poems/new' id='addPoem'>Add a poem</a>
+        <a
+          class="btn btn-success center-block"
+          href='/poems/new'
+          id='addPoem'>
+          Add a poem
+        </a>
       </div>
     </div>
   <% } %>
@@ -23,12 +36,20 @@
   <nav aria-label="Page navigation" class='text-center'>
     <ul class="pagination">
       <li>
-        <a href='#' id='pageForward' onClick="turnPage('back')" aria-label="Previous">
+        <a
+          href='#'
+          id='pageBackward'
+          onClick="turnPage('back')"
+          aria-label="Previous">
           <span aria-hidden="true">&laquo; previous&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </a>
       </li>
       <li>
-        <a href='#' id='pageForward' onClick="turnPage('forward')" aria-label="Next">
+        <a
+          href='#'
+          id='pageForward'
+          onClick="turnPage('forward')"
+          aria-label="Next">
           <span aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;next &raquo;</span>
         </a>
       </li>
@@ -38,16 +59,22 @@
   <%# Column headers %>
   <div class='row'>
     <div class='col-xs-3'>
-      <strong> <a href='#' id='toggleTitle' onClick='toggleTitle()'>title</a> </strong>
+      <strong>
+        <a href='#' id='toggleTitle' onClick='toggleTitle()'>title</a>
+      </strong>
     </div>
     <div class='col-xs-5'>
       <strong>preview</strong>
     </div>
     <div class='col-xs-2'>
-      <strong> <a href='#' id='toggleAuthor' onClick='toggleAuthor()'>started by</a> </strong>
+      <strong>
+        <a href='#' id='toggleAuthor' onClick='toggleAuthor()'>started by</a>
+      </strong>
     </div>
     <div class='col-xs-2'>
-      <strong> <a href='#' id='toggleDate' onClick='toggleDate()'>date</a> </strong>
+      <strong>
+        <a href='#' id='toggleDate' onClick='toggleDate()'>date</a>
+      </strong>
     </div>
   </div>
   <% poems.forEach(function(poem){ %>
@@ -68,7 +95,11 @@
         <% if (poem.lineBeingEdited == 16) { %>
           <div class='completepoem'>complete</div>
           <div>
-            <%= poem.l1w1 %> <%= poem.l1w2 %> <%= poem.l1w3 %> <%= poem.l1w4 %> <%= poem.l1w5 %>
+            <%= poem.l1w1 %>
+            <%= poem.l1w2 %>
+            <%= poem.l1w3 %>
+            <%= poem.l1w4 %>
+            <%= poem.l1w5 %>
           </div>
         <% } %>
 
@@ -78,7 +109,7 @@
       </div>
       <div class='col-xs-2 wrap'>
         <script>
-          var date = new Date('<%= poem.createdAt %>');  // dateStr you get from mongodb
+          var date = new Date('<%= poem.createdAt %>');  // dateStr from mongodb
           date = date.toString();
           date = date.substring(0,24);
           document.write(date);
