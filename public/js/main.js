@@ -1,8 +1,8 @@
 // -----------------------------------------------------------------------------
 // Variables to make it easier to switch between dev and prod
 // -----------------------------------------------------------------------------
-var prefix = 'https://dev.' // Change this to 'https://' when in prod.
-                            // Note that the . is necessary when in dev
+var prefix = 'https://dev.'; // Change this to 'https://' when in prod.
+                             // Note that the . is necessary when in dev
 
 // -----------------------------------------------------------------------------
 // Confirmation dialogue for delete buttons
@@ -89,7 +89,7 @@ function getId() {
   i = getPosition(userId, '/', 1);
   // Cut the string from the first / to the end of the user id substring
   userId = userId.substring(1, 25);
-  console.log('userId:  ' + userId);
+  // console.log('userId:  ' + userId);
   return(userId);
 }
 
@@ -104,7 +104,7 @@ function myPoemsToggleTitle() {
 
 function myPoemsToggleDate() {
   userId = getId();
-  console.log(userId);
+  // console.log(userId);
   if (window.location.href.indexOf("myPoemsByDateReverse") > -1) {
     window.location.href = prefix + 'fifteenlines.com/poems/myPoemsByDate/id/' + userId + '/skip/0/limit/' + limit;
   } else {
@@ -196,6 +196,6 @@ function turnPage(direction) {
   }
 
   newUrl = newUrl + 'skip/' + skip + '/limit/' + limit;
-  console.log(newUrl);
+  // console.log(newUrl);
   window.location.href = newUrl; //Send the browser to the new URL.
 }

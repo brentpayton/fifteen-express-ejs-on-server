@@ -116,7 +116,7 @@ router.put('/users/:id', middleware.isAdmin, function (req, res){
       req.flash('success', 'User updated');
       // res.redirect('/users/' + req.params.id);
       res.redirect('/users');
-      console.log(req.body.user);
+      // console.log(req.body.user);
     }
   });
 });
@@ -126,7 +126,7 @@ router.put('/users/:id', middleware.isAdmin, function (req, res){
 // ----------------------------------------------------------------------------
 router.delete('/users/:id', middleware.isAdmin, function (req, res) {
   User.findByIdAndRemove(req.params.id, function(err) {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     if (err) {
       console.log(err);
       res.redirect('/users');

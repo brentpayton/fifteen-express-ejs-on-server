@@ -627,7 +627,7 @@ router.put('/:id', function (req, res){
       console.log(err);
       res.redirect('/poems');
     } else {
-      console.log(req.body.poem);
+      // console.log(req.body.poem);
       req.flash('success', 'Poem updated');
       res.redirect('/poems/' + req.params.id);
     }

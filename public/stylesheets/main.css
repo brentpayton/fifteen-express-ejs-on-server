@@ -74,3 +74,7 @@
 .addPoemButton {
   margin-top: 5px;
 }
+
+.loginColumnSeparator{
+  border-right: thin solid black;
+}

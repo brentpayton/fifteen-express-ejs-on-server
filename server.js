@@ -86,7 +86,7 @@ passport.use(new FacebookStrategy({
     profileFields:['id', 'displayName', 'name', 'email']
     }, function(accessToken, refreshToken, profile, done) {
         "use strict";
-        console.log(profile);
+        // console.log(profile);
         var me = new user({
             email:profile.emails[0].value,
             provider:profile.provider,
@@ -101,7 +101,7 @@ passport.use(new FacebookStrategy({
                     done(null,me);
                 });
             } else {
-                console.log(u);
+                // console.log(u);
                 done(null, u);
             }
         });
@@ -113,7 +113,7 @@ passport.use(new FacebookStrategy({
 // ----------------------------------------------------------------------------
 passport.serializeUser(function(user, done) {
     "use strict";
-    console.log(user);
+    // console.log(user);
     done(null, user._id);
 });
 
