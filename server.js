@@ -4,8 +4,19 @@
 // ----------------------------------------------------------------------------
 // Express
 // ----------------------------------------------------------------------------
-// Following line ensures smooth operation with 'forever' automation
-process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
+
+// The following ensures smooth operation with 'forever' automation
+switch(app.get('env')) {
+    case 'development':
+        process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
+        break;
+    case 'production':
+        process.chdir('/usr/share/nginx/html/fifteenlines/');
+        break;
+    default:
+        throw new error('Unknown execution environment: ', app.get('env'));
+}
+
 var express               = require('express');
 var passport              = require('passport');
 var Strategy              = require('passport-facebook').Strategy;
@@ -26,8 +37,10 @@ var expressSession        = require('express-session');
                             }));
 var moment                = require('moment');
 var promise               = require('bluebird');
-// var port               = 3010;
 
+// Switch between TCP/IP ports depending on environment.  Necessary in order to
+// keep separate dev and prod directories and to deal with the way reverse
+// proxying works.
 switch(app.get('env')) {
     case 'development':
         var port = 3010;
@@ -41,6 +54,8 @@ switch(app.get('env')) {
 
 // ----------------------------------------------------------------------------
 // Mongoose
+// Referenced files mondodev and mongoprod are intentionally excluded from
+// source control.
 // ----------------------------------------------------------------------------
 switch(app.get('env')) {
     case 'development':
