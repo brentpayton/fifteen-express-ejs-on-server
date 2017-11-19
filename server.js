@@ -5,21 +5,8 @@
 // Express
 // ----------------------------------------------------------------------------
 
-// The following ensures smooth operation with 'forever' automation
-switch(app.get('env')) {
-    case 'development':
-        process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
-        break;
-    case 'production':
-        process.chdir('/usr/share/nginx/html/fifteenlines/');
-        break;
-    default:
-        throw new error('Unknown execution environment: ', app.get('env'));
-}
-
 var express               = require('express');
 var passport              = require('passport');
-var Strategy              = require('passport-facebook').Strategy;
 var fs                    = require('fs');
 var spdy                  = require('spdy');
 var app                   = express();
@@ -29,6 +16,7 @@ var bodyParser            = require('body-parser');
 var credentials           = require('./credentials.json');
 var passport              = require('passport'),
     FacebookStrategy      = require('passport-facebook').Strategy;
+    TwitterStrategy       = require('passport-twitter').Strategy;
 var expressSession        = require('express-session');
                             app.use(expressSession({
                               secret              : credentials.expressSession,
@@ -47,6 +35,18 @@ switch(app.get('env')) {
         break;
     case 'production':
         var port = 3011;
+        break;
+    default:
+        throw new error('Unknown execution environment: ', app.get('env'));
+}
+
+// The following ensures smooth operation with 'forever' automation
+switch(app.get('env')) {
+    case 'development':
+        process.chdir('/usr/share/nginx/html/dev.fifteenlines/');
+        break;
+    case 'production':
+        process.chdir('/usr/share/nginx/html/fifteenlines/');
         break;
     default:
         throw new error('Unknown execution environment: ', app.get('env'));
@@ -93,7 +93,7 @@ passport.use(new FacebookStrategy({
             username:profile.displayName,
         });
 
-        /* save if new */
+        // Save if new
         user.findOne({email:me.email}, function(err, u) {
             if(!u) {
                 me.save(function(err, me) {
@@ -107,6 +107,108 @@ passport.use(new FacebookStrategy({
         });
   }
 ));
+
+// ----------------------------------------------------------------------------
+// Twitter Auth
+// ----------------------------------------------------------------------------
+
+passport.use(new TwitterStrategy({
+    consumerKey: credentials.twitter.consumer_key,
+    consumerSecret: credentials.twitter.consumer_secret,
+    callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback"
+  },
+  function(token, tokenSecret, profile, cb) {
+    "use strict";
+    // console.log('************************************************************');
+    // console.log(profile);
+    // console.log('************************************************************');
+    // console.log(profile.username);
+    // console.log(profile.username + '@twitter.com');
+    // console.log(profile.provider);
+    // console.log('************************************************************');
+    User.findOrCreate({
+        // name:         profile.name,
+        username:     profile.username,
+        // email_1:  profile._id,
+        provider:     profile.provider
+      }, function (err, user) {
+      // console.log('**********************************************************');
+      // console.log(user);
+      // console.log('**********************************************************');
+      return cb(err, user);
+    });
+  }
+));
+
+// passport.use(new TwitterStrategy({
+//       consumerKey: credentials.twitter.consumer_key,
+//       consumerSecret: credentials.twitter.consumer_secret,
+//       callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback"
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//         //check user table for anyone with a Twitter ID of profile.id
+//         "use strict";
+//         User.findOne({
+//             'twitter.id': profile.id
+//         }, function(err, user) {
+//             if (err) {
+//                 return done(err);
+//             }
+//             //No user was found... so create a new user with values from Twitter (all the profile. stuff)
+//             if (!user) {
+//                 console.log(profile);
+//                 user = new User({
+//                     name: profile.displayName,
+//                     email: profile.email,
+//                     username: profile.username,
+//                     provider: 'twitter',
+//                     //now in the future searching on User.findOne({'twitter.id': profile.id } will match because of this next line
+//                     twitter: profile._json
+//                 });
+//                 console.log('************************************************');
+//                 console.log(user);
+//                 user.save(function(err) {
+//                     if (err) console.log(err);
+//                     return done(err, user);
+//                 });
+//             } else {
+//                 //found user. Return
+//                 return done(err, user);
+//             }
+//         });
+//     }
+// ));
+
+// passport.use(new TwitterStrategy({
+//     consumerKey: credentials.twitter.consumer_key,
+//     consumerSecret: credentials.twitter.consumer_secret,
+//     callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback",
+//     // profileFields:['id', 'displayName', 'name', 'email']
+//     }, function(accessToken, refreshToken, profile, done) {
+//         "use strict";
+//         console.log(profile);
+//         var me = new user({
+//             // email:profile.email,
+//             provider:profile.provider,
+//             username:profile.username,
+//             name:profile.displayName,
+//         });
+//
+//         // Save if new
+//         user.findOne({email:me.email}, function(err, u) {
+//             if(!u) {
+//                 me.save(function(err, me) {
+//                     if(err) return done(err);
+//                     done(null,me);
+//                 });
+//             } else {
+//                 console.log('****************************************');
+//                 console.log(u);
+//                 done(null, u);
+//             }
+//         });
+//   }
+// ));
 
 // ----------------------------------------------------------------------------
 // User serialize/deserialize
@@ -183,8 +285,8 @@ app.use(passport.session());
 // ----------------------------------------------------------------------------
 // Routes
 // ----------------------------------------------------------------------------
+// All poem routes start with '/poems'
 var poemRoutes              = require('./routes/poems.js');
-                            // All poem routes start with '/poems'
                             app.use('/poems', poemRoutes);
 
 // TODO:  Decide whether to keep comments or not.
@@ -228,6 +330,21 @@ app.get('/facebook/profile',
     "use strict";
     res.render('facebook/profile', { user: req.user });
   });
+
+// ----------------------------------------------------------------------------
+// Twitter Routes
+// ----------------------------------------------------------------------------
+
+  app.get('/auth/twitter',
+    passport.authenticate('twitter'));
+
+  app.get('/auth/twitter/callback',
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      "use strict";
+      res.redirect('/');
+    });
 
 // ----------------------------------------------------------------------------
 // SPDY
