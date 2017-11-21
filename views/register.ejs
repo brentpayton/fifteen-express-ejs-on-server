@@ -27,7 +27,20 @@
     </div>
   </div>
   <div class='row'>
-    <div class='col-sm-6' loginColumnSeparator>
+    <div class='col-sm-6 col-sm-offset-3'>
+      <a href="/login/facebook"><img src="../images/facebook.png" width="200" alt="Facebook sign up button"></a>
+      <br />
+      <br />
+      <a href="/auth/twitter"><img src="../images/twitter.png" width="200" alt="Twitter sign up button"></a>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+      or
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
       <form action='/register' method='POST'>
         <div class="form-group">
           <input type='text' class="form-control" name='username' id='username' placeholder='username' required>
@@ -42,12 +55,6 @@
         <div class="g-recaptcha" data-sitekey="6LciljMUAAAAAO0i0yE7IxRZzZOonQFgI62icNKO" data-callback="enableBtn"></div>
         <button class="btn btn-primary" type="submit" id="signUp" name="signUp">Sign Up</button>
       </form>
-    </div>
-    <div class='col-sm-6'>
-      <a href="/login/facebook"><img src="../images/facebook.png" width="200" alt="Facebook sign up button"></a>
-      <br />
-      <br />
-      <a href="/auth/twitter"><img src="../images/twitter.png" width="200" alt="Twitter sign up button"></a>
     </div>
 </div>
 
