@@ -40,6 +40,10 @@ switch(app.get('env')) {
         throw new error('Unknown execution environment: ', app.get('env'));
 }
 
+// Keep Express from identifying itself in response headers.  This will improve
+// security slightly.
+app.disable('x-powered-by');
+
 // The following ensures smooth operation with 'forever' automation
 switch(app.get('env')) {
     case 'development':
@@ -139,76 +143,6 @@ passport.use(new TwitterStrategy({
     });
   }
 ));
-
-// passport.use(new TwitterStrategy({
-//       consumerKey: credentials.twitter.consumer_key,
-//       consumerSecret: credentials.twitter.consumer_secret,
-//       callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback"
-//     },
-//     function(accessToken, refreshToken, profile, done) {
-//         //check user table for anyone with a Twitter ID of profile.id
-//         "use strict";
-//         User.findOne({
-//             'twitter.id': profile.id
-//         }, function(err, user) {
-//             if (err) {
-//                 return done(err);
-//             }
-//             //No user was found... so create a new user with values from Twitter (all the profile. stuff)
-//             if (!user) {
-//                 console.log(profile);
-//                 user = new User({
-//                     name: profile.displayName,
-//                     email: profile.email,
-//                     username: profile.username,
-//                     provider: 'twitter',
-//                     //now in the future searching on User.findOne({'twitter.id': profile.id } will match because of this next line
-//                     twitter: profile._json
-//                 });
-//                 console.log('************************************************');
-//                 console.log(user);
-//                 user.save(function(err) {
-//                     if (err) console.log(err);
-//                     return done(err, user);
-//                 });
-//             } else {
-//                 //found user. Return
-//                 return done(err, user);
-//             }
-//         });
-//     }
-// ));
-
-// passport.use(new TwitterStrategy({
-//     consumerKey: credentials.twitter.consumer_key,
-//     consumerSecret: credentials.twitter.consumer_secret,
-//     callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback",
-//     // profileFields:['id', 'displayName', 'name', 'email']
-//     }, function(accessToken, refreshToken, profile, done) {
-//         "use strict";
-//         console.log(profile);
-//         var me = new user({
-//             // email:profile.email,
-//             provider:profile.provider,
-//             username:profile.username,
-//             name:profile.displayName,
-//         });
-//
-//         // Save if new
-//         user.findOne({email:me.email}, function(err, u) {
-//             if(!u) {
-//                 me.save(function(err, me) {
-//                     if(err) return done(err);
-//                     done(null,me);
-//                 });
-//             } else {
-//                 console.log('****************************************');
-//                 console.log(u);
-//                 done(null, u);
-//             }
-//         });
-//   }
-// ));
 
 // ----------------------------------------------------------------------------
 // User serialize/deserialize
@@ -347,6 +281,25 @@ app.get('/facebook/profile',
     });
 
 // ----------------------------------------------------------------------------
+// Custom Error Pages
+// ----------------------------------------------------------------------------
+
+    // 404 catch-all handler (middleware)
+    app.use(function(req, res, next){
+      "use strict";
+    	res.status(404);
+    	res.render('404');
+    });
+
+    // 500 error handler (middleware)
+    app.use(function(err, req, res, next){
+      "use strict";
+    	console.error(err.stack);
+    	res.status(500);
+    	res.render('500');
+    });
+
+// ----------------------------------------------------------------------------
 // SPDY
 // ----------------------------------------------------------------------------
 var options = {
@@ -365,3 +318,11 @@ spdy
       console.log('Listening on port: ' + port + '.');
     }
   });
+
+// ----------------------------------------------------------------------------
+// Start the server in HTTP mode.  DOES NOT WORK
+// ----------------------------------------------------------------------------
+// app.listen(app.get('port'), function(){
+//   "use strict";
+//   console.log( 'Started on port ' + port + '. Press Ctrl-C to terminate.' );
+// });
