@@ -268,36 +268,34 @@ app.get('/facebook/profile',
 // ----------------------------------------------------------------------------
 // Twitter Routes
 // ----------------------------------------------------------------------------
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
 
-  app.get('/auth/twitter',
-    passport.authenticate('twitter'));
-
-  app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: '/login' }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      "use strict";
-      res.redirect('/');
-    });
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    "use strict";
+    res.redirect('/');
+  });
 
 // ----------------------------------------------------------------------------
 // Custom Error Pages
 // ----------------------------------------------------------------------------
+// 404 catch-all handler (middleware)
+app.use(function(req, res, next){
+  "use strict";
+	res.status(404);
+	res.render('404');
+});
 
-    // 404 catch-all handler (middleware)
-    app.use(function(req, res, next){
-      "use strict";
-    	res.status(404);
-    	res.render('404');
-    });
-
-    // 500 error handler (middleware)
-    app.use(function(err, req, res, next){
-      "use strict";
-    	console.error(err.stack);
-    	res.status(500);
-    	res.render('500');
-    });
+// 500 error handler (middleware)
+app.use(function(err, req, res, next){
+  "use strict";
+	console.error(err.stack);
+	res.status(500);
+	res.render('500');
+});
 
 // ----------------------------------------------------------------------------
 // SPDY

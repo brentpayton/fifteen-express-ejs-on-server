@@ -25,13 +25,14 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/howToPlay', function(req, res) {
-  Poem.find({}, function(err, allPoems){
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('howtoplay');
-    }
+router.get('/howToPlay',
+  function(req, res) {
+    res.render('howtoplay');
   });
-});
+
+router.get('/terms',
+  function(req, res) {
+    res.render('terms');
+  });
+
 module.exports = router;
