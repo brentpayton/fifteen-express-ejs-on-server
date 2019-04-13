@@ -29,13 +29,13 @@ grunt.initConfig({
 				'--adjust-extension',
 				'--retry-connrefused',
 				'--save-headers=off',
-				'dev.fifteenlines.com'
+				'fifteenlines.com'
 			]
 		},
 		blc: {
 			cmd: 'blc',
 			args: [
-				'https://dev.fifteenlines.com',
+				'https://fifteenlines.com',
 				'--filter-level 3 ',
 				'--ordered ',
 				'--recursive ',
@@ -62,7 +62,7 @@ grunt.initConfig({
 			maxConcurrency: 20
 		},
 	  default: {
-	    site: 'dev.fifteenlines.com',
+	    site: 'fifteenlines.com',
 	    options: {
 	      initialPort: 443
 	    }

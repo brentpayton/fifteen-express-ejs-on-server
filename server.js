@@ -6,7 +6,7 @@
 // ----------------------------------------------------------------------------
 
 var express               = require('express');
-var passport              = require('passport');
+// var passport              = require('passport');
 var fs                    = require('fs');
 var spdy                  = require('spdy');
 var app                   = express();
@@ -119,7 +119,8 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: credentials.twitter.consumer_key,
     consumerSecret: credentials.twitter.consumer_secret,
-    callbackURL: "https://dev.fifteenlines.com/auth/twitter/callback"
+    //callbackURL: "https://fifteenlines.com/auth/twitter/callback"
+    callbackURL: credentials.twitter.callback
   },
   function(token, tokenSecret, profile, cb) {
     "use strict";
