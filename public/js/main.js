@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // Variables to make it easier to switch between dev and prod
 // -----------------------------------------------------------------------------
-var prefix = 'https://dev.'; // Change this to 'https://' when in prod.
+var prefix = 'https://'; // Change this to 'https://' when in prod.
                              // Note that the . is necessary when in dev
 
 // -----------------------------------------------------------------------------

@@ -6,7 +6,6 @@
 // ----------------------------------------------------------------------------
 
 var express               = require('express');
-// var passport              = require('passport');
 var fs                    = require('fs');
 var spdy                  = require('spdy');
 var app                   = express();
