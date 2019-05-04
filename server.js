@@ -4,18 +4,24 @@
 // ----------------------------------------------------------------------------
 // Express
 // ----------------------------------------------------------------------------
-
+var cookieParser          = require('cookie-parser');
+var csrf                  = require('csurf');
+var bodyParser            = require('body-parser');
 var express               = require('express');
+var csrfProtection        = csrf({ cookie: true });
+var parseForm             = bodyParser.urlencoded({ extended: false });
 var fs                    = require('fs');
 var spdy                  = require('spdy');
+
 var app                   = express();
+                            app.use(cookieParser());
                             app.set('view engine', 'ejs');
                             app.use(express.static(__dirname + '/public'));
-var bodyParser            = require('body-parser');
+
 var credentials           = require('./credentials.json');
-var passport              = require('passport'),
-    FacebookStrategy      = require('passport-facebook').Strategy;
-    TwitterStrategy       = require('passport-twitter').Strategy;
+var passport              = require('passport');
+var FacebookStrategy      = require('passport-facebook').Strategy;
+var TwitterStrategy       = require('passport-twitter').Strategy;
 var expressSession        = require('express-session');
                             app.use(expressSession({
                               secret              : credentials.expressSession,
@@ -24,6 +30,9 @@ var expressSession        = require('express-session');
                             }));
 var moment                = require('moment');
 var promise               = require('bluebird');
+
+// 2019-04-29 because of Tinfoil security scan
+var sanitize = require('mongo-sanitize');
 
 // Switch between TCP/IP ports depending on environment.  Necessary in order to
 // keep separate dev and prod directories and to deal with the way reverse
@@ -209,10 +218,10 @@ app.use(function(req, res, next) {
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('body-parser').urlencoded({ extended: true }));
+
 app.use(require('express-session')({ secret: credentials.expressSession, resave: true, saveUninitialized: true }));
 
-// Initialize Passport and restore authentication state, if any, from the
-// session.
+// Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -301,24 +310,24 @@ app.use(function(err, req, res, next){
 // SPDY
 // ----------------------------------------------------------------------------
 var options = {
-    key: fs.readFileSync(credentials.spdy.key),
-    cert:  fs.readFileSync(credentials.spdy.cert)
+   key: fs.readFileSync(credentials.spdy.key),
+   cert:  fs.readFileSync(credentials.spdy.cert)
 };
 
 spdy
-  .createServer(options, app)
-  .listen(port, (error) => {
-    "use strict";
-    if (error) {
-      console.error(error);
-      return process.exit(1);
-    } else {
-      console.log('Listening on port: ' + port + '.');
-    }
-  });
+ .createServer(options, app)
+ .listen(port, (error) => {
+   "use strict";
+   if (error) {
+     console.error(error);
+     return process.exit(1);
+   } else {
+     console.log('Listening on port: ' + port + '.');
+   }
+ });
 
 // ----------------------------------------------------------------------------
-// Start the server in HTTP mode.  DOES NOT WORK
+// Start the server in HTTP mode.
 // ----------------------------------------------------------------------------
 // app.listen(app.get('port'), function(){
 //   "use strict";

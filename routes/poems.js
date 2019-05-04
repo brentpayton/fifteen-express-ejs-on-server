@@ -2,6 +2,8 @@ var express               = require('express');
 var router                = express.Router({mergeParams: true});
 var Poem                  = require('../models/poem');
 var middleware            = require('../middleware');  // Contents of index.js automatically required
+// 2019-04-29 because of Tinfoil security scan
+var sanitize = require('mongo-sanitize');
 
 // ----------------------------------------------------------------------------
 // Show all poems
@@ -315,7 +317,11 @@ router.get('/new', middleware.isLoggedIn, function(req, res) {
 
 router.post('/', middleware.isLoggedIn, function(req, res) {
   var title        = req.body.title;
-  var wordsPerLine = req.body.wordsPerLine;
+  // 2019-04-29 in resonse to Tinfoil security scan
+  // var wordsPerLine = req.body.wordsPerLine;
+  var clean = sanitize(req.body.wordPerLine);
+  var wordsPerLine = clean;
+
   var l1w1         = req.body.l1w1;
   var l1w2         = req.body.l1w2;
   var l1w3         = req.body.l1w3;

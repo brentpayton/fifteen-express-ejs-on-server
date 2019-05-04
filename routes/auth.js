@@ -4,7 +4,10 @@ var express               = require('express');
 var router                = express.Router({mergeParams: true});
 var passport              = require('passport');
 var User                  = require('../models/user');
-
+var csrf                  = require('csurf');
+var csrfProtection        = csrf({ cookie: true });
+// var parseForm             = bodyParser.urlencoded({ extended: false });
+var bodyParser            = require('body-parser');
 // ----------------------------------------------------------------------------
 // reCAPTCHA
 // ----------------------------------------------------------------------------
@@ -25,6 +28,7 @@ router.post('/register', recaptcha.middleware.verify, function(req, res) {
       email:          req.body.email,
       provider:       'local',
       admin:          false});
+
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       req.flash('error', err.message);
@@ -48,18 +52,29 @@ router.get('/register_no_captcha', recaptcha.middleware.render, (req, res) => {
 // ----------------------------------------------------------------------------
 // Log in
 // ----------------------------------------------------------------------------
-router.get('/login', function(req, res) {
-  res.render('login');
+// router.get('/login', function(req, res) {
+//  res.render('login');
+// });
+
+router.get('/login', csrfProtection, function(req, res) {
+  res.render('send', { csrfToken: req.csrfToken() });
 });
 
-router.post('/login', passport.authenticate('local',
+// router.post('/login', passport.authenticate('local',
+//   {
+//     successRedirect:'/poems',
+//     failureRedirect:'/login',
+//     failureFlash: true
+//   }), function(req, res) {
+// });
+
+router.post('/login', bodyParser, csrfProtection, passport.authenticate('local',
   {
     successRedirect:'/poems',
     failureRedirect:'/login',
     failureFlash: true
   }), function(req, res) {
 });
-
 // ----------------------------------------------------------------------------
 // Log out
 // ----------------------------------------------------------------------------
