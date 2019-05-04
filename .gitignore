@@ -5,10 +5,14 @@
 node_modules/
 npm-debug.log
 
+backup_example.txt
+credentials.old.json
 credentials.json
 mongoDev.js
 mongoProd.js
 temp
+backup
 ~$project.xlsx
 .cache
 __pycache__
+
