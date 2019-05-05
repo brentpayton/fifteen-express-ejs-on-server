@@ -22,13 +22,26 @@ var credentials           = require('./credentials.json');
 var passport              = require('passport');
 var FacebookStrategy      = require('passport-facebook').Strategy;
 var TwitterStrategy       = require('passport-twitter').Strategy;
+// var expressSession        = require('express-session');
+//                             app.use(expressSession({
+//                               secret              : credentials.expressSession,
+//                               resave              : false,
+//                               saveUninitialized   : true,
+//                               cookie              : { secure: true }
+//                             }));
+
 var expressSession        = require('express-session');
-                            app.use(expressSession({
-                              secret              : credentials.expressSession,
-                              resave              : false,
-                              saveUninitialized   : true,
-                              cookie              : { secure: true }
-                            }));
+var MemoryStore           = require('memorystore')(expressSession);
+app.use(expressSession({
+    cookie: { maxAge: 86400000, secure: true },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
 var moment                = require('moment');
 var promise               = require('bluebird');
 
