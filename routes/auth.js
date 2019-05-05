@@ -18,8 +18,14 @@ var recaptcha             = new Recaptcha(credentials.reCAPTCHA.site_key, creden
 // ----------------------------------------------------------------------------
 // Register
 // ----------------------------------------------------------------------------
-router.get('/register', recaptcha.middleware.render, (req, res) => {
-    res.render('register', { captcha: res.recaptcha });
+
+// 2019-05-04 due to Tinfoil security scan
+// router.get('/register', recaptcha.middleware.render, (req, res) => {
+//     res.render('register', { captcha: res.recaptcha });
+// });
+
+router.get('/register', csrfProtection, recaptcha.middleware.render, function(req, res) {
+    res.render('register', { csrfToken: req.csrfToken(), captcha: res.recaptcha });
 });
 
 router.post('/register', recaptcha.middleware.verify, function(req, res) {
@@ -53,11 +59,11 @@ router.get('/register_no_captcha', recaptcha.middleware.render, (req, res) => {
 // Log in
 // ----------------------------------------------------------------------------
 // router.get('/login', function(req, res) {
-//  res.render('login');
+// res.render('login');
 // });
 
 router.get('/login', csrfProtection, function(req, res) {
-  res.render('send', { csrfToken: req.csrfToken() });
+  res.render('login', { csrfToken: req.csrfToken() });
 });
 
 // router.post('/login', passport.authenticate('local',
@@ -68,13 +74,14 @@ router.get('/login', csrfProtection, function(req, res) {
 //   }), function(req, res) {
 // });
 
-router.post('/login', bodyParser, csrfProtection, passport.authenticate('local',
+router.post('/login', csrfProtection, passport.authenticate('local',
   {
     successRedirect:'/poems',
     failureRedirect:'/login',
     failureFlash: true
   }), function(req, res) {
 });
+
 // ----------------------------------------------------------------------------
 // Log out
 // ----------------------------------------------------------------------------

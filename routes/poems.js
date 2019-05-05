@@ -2,8 +2,12 @@ var express               = require('express');
 var router                = express.Router({mergeParams: true});
 var Poem                  = require('../models/poem');
 var middleware            = require('../middleware');  // Contents of index.js automatically required
-// 2019-04-29 because of Tinfoil security scan
-var sanitize = require('mongo-sanitize');
+// 2019-05-04 becasue of Tinfoil security scan.
+var csrf                  = require('csurf');
+var csrfProtection        = csrf({ cookie: true });
+var bodyParser            = require('body-parser');
+// 2019-04-29 because of Tinfoil security scan.
+var sanitize              = require('mongo-sanitize');
 
 // ----------------------------------------------------------------------------
 // Show all poems
@@ -311,11 +315,16 @@ router.get('/myPoemsByTitleReverse/id/:id/skip/:skip/limit/:limit', function(req
 // ----------------------------------------------------------------------------
 // Create
 // ----------------------------------------------------------------------------
-router.get('/new', middleware.isLoggedIn, function(req, res) {
-  res.render('poems/new');
+// router.get('/new', middleware.isLoggedIn, function(req, res) {
+//   res.render('poems/new');
+// });
+
+// 2019-05-04 due to Tinfoil security scan.
+router.get('/new', middleware.isLoggedIn, csrfProtection, function(req, res) {
+  res.render('poems/new', { csrfToken: req.csrfToken() });
 });
 
-router.post('/', middleware.isLoggedIn, function(req, res) {
+router.post('/', csrfProtection, middleware.isLoggedIn, function(req, res) {
   var title        = req.body.title;
   // 2019-04-29 in resonse to Tinfoil security scan
   // var wordsPerLine = req.body.wordsPerLine;

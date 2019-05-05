@@ -5,7 +5,9 @@
     <h1 style='text-align: center'>Add a Poem</h1>
     <div style='margin: 25px auto;'>
       <form action='/poems' method='POST'>
+        <!-- 2019-05-04 due to Tinfoil security scan -->
         <div class='form-group'>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <input class='form-control' type='text' placeholder='title' name='title' id='title' required>
         </div>
         <div class='form-group'>
