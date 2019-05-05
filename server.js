@@ -26,7 +26,8 @@ var expressSession        = require('express-session');
                             app.use(expressSession({
                               secret              : credentials.expressSession,
                               resave              : false,
-                              saveUninitialized   : false
+                              saveUninitialized   : true,
+                              cookie              : { secure: true }
                             }));
 var moment                = require('moment');
 var promise               = require('bluebird');
@@ -218,8 +219,6 @@ app.use(function(req, res, next) {
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('body-parser').urlencoded({ extended: true }));
-
-app.use(require('express-session')({ secret: credentials.expressSession, resave: true, saveUninitialized: true }));
 
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
