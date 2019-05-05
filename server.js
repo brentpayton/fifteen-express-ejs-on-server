@@ -80,7 +80,7 @@ switch(app.get('env')) {
 
 // ----------------------------------------------------------------------------
 // Mongoose
-// Referenced files mondodev and mongoprod are intentionally excluded from
+// Referenced files mongodev and mongoprod are intentionally excluded from
 // source control.
 // ----------------------------------------------------------------------------
 switch(app.get('env')) {
