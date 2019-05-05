@@ -4,7 +4,7 @@
 # Node.js
 node_modules/
 npm-debug.log
-
+package-lock.json
 backup_example.txt
 credentials.old.json
 credentials.json
